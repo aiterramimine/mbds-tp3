@@ -23,14 +23,14 @@ public class AccountBean implements Serializable {
 
     private static final Logger log = Logger.getLogger(AccountBean.class.getName());
 
-    private String id;
+    private int id;
     private int balance;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

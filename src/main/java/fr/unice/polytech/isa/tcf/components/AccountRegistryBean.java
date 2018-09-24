@@ -28,7 +28,7 @@ public class AccountRegistryBean implements IAccountFinder, IAccountRegistry {
     }
 
     @Override
-    public Optional<Account> findById(String id) {
+    public Optional<Account> findById(int id) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Account> criteria = builder.createQuery(Account.class);
         Root<Account> root = criteria.from(Account.class);

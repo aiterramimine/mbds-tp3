@@ -6,10 +6,10 @@ import java.io.Serializable;
 
 @Entity
 public class Account implements Serializable {
+
     @Id
-    @Basic(optional = false)
-    @NotNull
-    private Integer accountId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     private String clientName;
 
@@ -20,12 +20,12 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAccountId(Integer compteBnquaireId) {
-        this.accountId = compteBnquaireId;
+    public void setId(Integer compteBnquaireId) {
+        this.id = compteBnquaireId;
     }
 
     public String getClientName() {

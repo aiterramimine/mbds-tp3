@@ -8,6 +8,6 @@ import java.util.Optional;
 @Local
 public interface IAccountFinder {
 
-    Optional<Account> findById(String id);
+    Optional<Account> findById(int id);
 
 }

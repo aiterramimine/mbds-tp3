@@ -10,6 +10,7 @@
         <class>fr.unice.polytech.isa.tcf.entities.Customer</class>
         <class>fr.unice.polytech.isa.tcf.entities.Item</class>
         <class>fr.unice.polytech.isa.tcf.entities.Order</class>
+        <class>fr.unice.polytech.isa.tcf.entities.Account</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
