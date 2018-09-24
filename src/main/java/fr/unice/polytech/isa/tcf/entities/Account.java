@@ -1,15 +1,17 @@
 package fr.unice.polytech.isa.tcf.entities;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
+@Table(name= "accounts")
 public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private int id;
 
     private String clientName;
 

@@ -51,14 +51,14 @@ public class AccountBean implements Serializable {
         this.balance = balance;
     }
 
-    public void createAccount() {
-        /*try {
-            operations.createAccount(new Account(this.getClientName(), this.getBalance()));
+    public void register() {
+        System.out.println("Registering");
+        try {
+            registry.register(getBalance());
         } catch (Exception e) {
             System.out.print("error creating account : ");
             e.printStackTrace();
         }
-        */
     }
 
     public String select() {

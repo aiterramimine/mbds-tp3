@@ -24,10 +24,11 @@ public class AccountRegistryBean implements IAccountFinder, IAccountRegistry {
 
     @Override
     public void register(double initialTransfer) {
-        
+
         Account a = new Account();
         a.setBalance(initialTransfer);
-
+        a.setClientName("ok");
+        a.setBalance(2);
         manager.persist(a);
 
     }
