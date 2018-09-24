@@ -11,13 +11,10 @@
         <h:form id="register-form">
             <h:panelGrid columns="2">
                 <h:outputText value='Client name'/>
-                <h:inputText value='#{customerBean.name}' required="true" />
-                <h:outputText value='Credit card number'/>
-                <h:inputText value='#{customerBean.creditCard}' required="true"
-                             validatorMessage="Credit card number must be 10 digits">
-                    <f:validateRegex pattern="\d{10}+" />
-                </h:inputText>
-                <h:commandButton action="#{customerBean.register}" value="Register"/>
+                <h:inputText value='#{accountBean.clientName}' required="true" />
+                <h:outputText value='Balance'/>
+                <h:inputText value='#{accountBean.balance}' required="true"/>
+                <h:commandButton action="#{accountBean.createAccount}" value="Create account"/>
             </h:panelGrid>
         </h:form>
     </f:view>
