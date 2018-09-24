@@ -32,10 +32,18 @@ public class AccountOperationBean implements Serializable {
         this.id = id;
     }
 
-    public String deposit(int amount) {
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String credit() {
         if(finder.findById(getId()).isPresent()) {
             creditor.credit(id, amount);
-            return Signal.SELECTED_ACCOUNT;
+            return Signal.CREDITED_ACCOUNT;
         } else {
             FacesContext.getCurrentInstance()
                     .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));

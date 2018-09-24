@@ -12,4 +12,5 @@ class Signal {
     static final String EMPTY_CART = "EMPTY_CART";
     static final String SELECTED_ACCOUNT = "SELECTED_ACCOUNT";
     static final String CREATED_ACCOUNT = "CREATED_ACCOUNT";
+    static final String CREDITED_ACCOUNT = "CREDITED_ACCOUNT";
 }
