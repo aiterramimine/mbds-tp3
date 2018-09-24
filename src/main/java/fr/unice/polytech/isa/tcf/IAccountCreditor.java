@@ -5,6 +5,6 @@ import javax.ejb.Local;
 @Local
 public interface IAccountCreditor {
 
-    void credit(String accountId, double amount);
+    void credit(int accountId, double amount);
 
 }
