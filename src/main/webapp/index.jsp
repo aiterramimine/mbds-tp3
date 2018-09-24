@@ -1,4 +1,4 @@
 <%@ page session="false" %>
 <%
-    response.sendRedirect("formulaire_1.jsf");
+    response.sendRedirect("customer.jsf");
 %>
