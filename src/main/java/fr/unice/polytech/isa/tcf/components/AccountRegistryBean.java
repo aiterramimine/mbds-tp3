@@ -27,8 +27,6 @@ public class AccountRegistryBean implements IAccountFinder, IAccountRegistry {
 
         Account a = new Account();
         a.setBalance(initialTransfer);
-        a.setClientName("ok");
-        a.setBalance(2);
         manager.persist(a);
 
     }

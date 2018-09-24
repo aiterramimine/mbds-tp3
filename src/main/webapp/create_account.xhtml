@@ -34,6 +34,12 @@
         <f:view>
             <h:form id="register-form">
                 <h:panelGrid columns="2">
+
+                    <h:outputText value='Montant du dépot initial'/>
+                    <h:inputText value='#{accountBean.balance}' required="true">
+
+                    </h:inputText>
+
                     <h:outputText value='Numero de carte de crédit'/>
                     <!--<h:inputText value='#{accountBean.creditCardNum}' required="true"
                                  validatorMessage="Le numéro de carte de crédit doit compoter 10 chiffres">
