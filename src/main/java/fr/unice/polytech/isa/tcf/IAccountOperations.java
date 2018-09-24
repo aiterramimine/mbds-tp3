@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IAccountOperations {
 
-    public void deposit(int id, int amount);
+    void deposit(int id, int amount);
 
-    public int withdraw(int id, int amount);
+    int withdraw(int id, int amount);
 
     void createAccount(Account c);
 

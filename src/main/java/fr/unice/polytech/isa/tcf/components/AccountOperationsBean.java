@@ -19,19 +19,19 @@ public class AccountOperationsBean implements IAccountOperations {
     private IAccountRegistry register;
 
     public void deposit(int id, int montant) {
-        Account account = register.getAccountById(id);
-        account.setBalance(account.getBalance() + montant);
+       /* Account account = register.getAccountById(id);
+        account.setBalance(account.getBalance() + montant);*/
     }
 
     @Override
     public int withdraw(int id, int amount) {
-        Account account = register.getAccountById(id);
+       /* Account account = register.getAccountById(id);
         if (amount < account.getBalance()) {
             account.setBalance(account.getBalance() - amount);
             return amount;
-        } else {
+        } else {*/
             return 0;
-        }
+        //}
     }
 
     @Override

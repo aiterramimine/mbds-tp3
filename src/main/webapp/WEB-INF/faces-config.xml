@@ -5,15 +5,35 @@
               version="2.0">
 
     <navigation-rule>
+
         <from-view-id>/customer.xhtml</from-view-id>
+
         <navigation-case>
             <from-outcome>SELECTED</from-outcome>
             <to-view-id>/order.xhtml</to-view-id>
         </navigation-case>
+
         <navigation-case>
             <from-outcome>ADDED</from-outcome>
             <to-view-id>/order.xhtml</to-view-id>
         </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+
+        <from-view-id>/create_account.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>SELECTED_ACCOUNT</from-outcome>
+            <to-view-id>/formulaire_1.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>CREATED_ACCOUNT</from-outcome>
+            <to-view-id>/formulaire_1.xhtml</to-view-id>
+        </navigation-case>
+
     </navigation-rule>
 
     <navigation-rule>

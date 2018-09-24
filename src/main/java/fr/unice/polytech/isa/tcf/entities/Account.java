@@ -5,10 +5,6 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-@Table(name="Account")
-@NamedQueries({
-        @NamedQuery(name = "Account.findAll", query = "SELECT c from Account c")
-})
 public class Account implements Serializable {
     @Id
     @Basic(optional = false)

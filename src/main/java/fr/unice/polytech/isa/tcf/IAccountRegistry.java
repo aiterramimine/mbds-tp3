@@ -2,10 +2,10 @@ package fr.unice.polytech.isa.tcf;
 
 import fr.unice.polytech.isa.tcf.entities.Account;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface IAccountRegistry {
-    public Account getAccountById(int id);
-
-    List<Account> getAllAccounts();
+    void register(String creditCardNum, double initialTransfer);
 }
