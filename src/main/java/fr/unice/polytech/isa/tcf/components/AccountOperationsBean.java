@@ -1,9 +1,6 @@
 package fr.unice.polytech.isa.tcf.components;
 
-import fr.unice.polytech.isa.tcf.IAccountCreditor;
-import fr.unice.polytech.isa.tcf.IAccountFinder;
-import fr.unice.polytech.isa.tcf.IAccountOperations;
-import fr.unice.polytech.isa.tcf.IAccountRegistry;
+import fr.unice.polytech.isa.tcf.*;
 import fr.unice.polytech.isa.tcf.entities.Account;
 
 import javax.ejb.EJB;
@@ -13,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
 @Stateless
-public class AccountOperationsBean implements IAccountCreditor {
+public class AccountOperationsBean implements IAccountCreditor, IAccountDebitor {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -27,6 +24,22 @@ public class AccountOperationsBean implements IAccountCreditor {
         if (optionalAccount.isPresent()) {
             Account account = optionalAccount.get();
             account.setBalance(account.getBalance() + amount);
+        }
+    }
+
+    @Override
+    public double debit(int accountId, double amount) {
+        Optional<Account> optionalAccount = finder.findById(accountId);
+        if (optionalAccount.isPresent()) {
+            Account account = optionalAccount.get();
+            if (amount < account.getBalance()) {
+                account.setBalance(account.getBalance() - amount);
+                return amount;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
         }
     }
 

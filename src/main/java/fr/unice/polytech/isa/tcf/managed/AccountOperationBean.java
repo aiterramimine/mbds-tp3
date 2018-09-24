@@ -1,6 +1,7 @@
 package fr.unice.polytech.isa.tcf.managed;
 
 import fr.unice.polytech.isa.tcf.IAccountCreditor;
+import fr.unice.polytech.isa.tcf.IAccountDebitor;
 import fr.unice.polytech.isa.tcf.IAccountFinder;
 
 import javax.ejb.EJB;
@@ -20,6 +21,9 @@ public class AccountOperationBean implements Serializable {
 
     @EJB
     private IAccountCreditor creditor;
+
+    @EJB
+    private IAccountDebitor debitor;
 
     private int id;
     private double amount;
@@ -41,9 +45,20 @@ public class AccountOperationBean implements Serializable {
     }
 
     public String credit() {
-        if(finder.findById(getId()).isPresent()) {
+        if(finder.findById(id).isPresent()) {
             creditor.credit(id, amount);
             return Signal.CREDITED_ACCOUNT;
+        } else {
+            FacesContext.getCurrentInstance()
+                    .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));
+            return Signal.UNKOWN;
+        }
+    }
+
+    public String debit() {
+        if(finder.findById(id).isPresent()) {
+            debitor.debit(id, amount);
+            return Signal.DEBITED_ACCOUNT;
         } else {
             FacesContext.getCurrentInstance()
                     .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));

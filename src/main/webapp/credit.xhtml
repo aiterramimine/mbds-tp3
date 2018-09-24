@@ -3,7 +3,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
@@ -29,6 +28,20 @@
                 <h:outputText value="Amount"/>
                 <h:inputText value="#{accountOperationBean.amount}" required="true"/>
                 <h:commandButton action="#{accountOperationBean.credit}" value="Credit"/>
+            </h:panelGrid>
+        </h:form>
+    </f:view>
+
+    <h2>Withdraw money</h2>
+
+    <f:view>
+        <h:form id="debit-form">
+            <h:panelGrid columns="2">
+                <h:outputText value="Account ID"/>
+                <h:inputText value="#{accountOperationBean.id}" required="true"/>
+                <h:outputText value="Amount"/>
+                <h:inputText value="#{accountOperationBean.amount}" required="true"/>
+                <h:commandButton action="#{accountOperationBean.debit}" value="Debit"/>
             </h:panelGrid>
         </h:form>
     </f:view>
