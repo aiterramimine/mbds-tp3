@@ -19,12 +19,21 @@ import java.util.logging.Logger;
 public class AccountBean implements Serializable {
 
     @EJB private IAccountFinder finder;
-    //@EJB private IAccountRegistry registry;
+    @EJB private IAccountRegistry registry;
 
     private static final Logger log = Logger.getLogger(AccountBean.class.getName());
 
     private int id;
     private int balance;
+    private int creditCardNum;
+
+    public int getCreditCardNum() {
+        return creditCardNum;
+    }
+
+    public void setCreditCardNum(int creditCardNum) {
+        this.creditCardNum = creditCardNum;
+    }
 
     public int getId() {
         return id;
@@ -53,12 +62,11 @@ public class AccountBean implements Serializable {
     }
 
     public String select() {
-        System.out.println("Entered heeeeere");
         if(finder.findById(getId()).isPresent()) {
             return Signal.SELECTED_ACCOUNT;
         } else {
             FacesContext.getCurrentInstance()
-                    .addMessage("form-error", new FacesMessage("Unknown account of id: " + getId()));
+                    .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));
             return Signal.UNKOWN;
         }
     }

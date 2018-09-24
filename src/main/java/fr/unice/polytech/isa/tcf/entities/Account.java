@@ -13,7 +13,11 @@ public class Account implements Serializable {
 
     private String clientName;
 
-    private Integer balance;
+    private double balance;
+
+    public Account() {
+
+    }
 
     public Account(String clientName, Integer balance) {
         this.clientName = clientName;
@@ -36,11 +40,11 @@ public class Account implements Serializable {
         this.clientName = clientName;
     }
 
-    public Integer getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 }

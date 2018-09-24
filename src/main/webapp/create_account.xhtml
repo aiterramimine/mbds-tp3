@@ -30,6 +30,20 @@
             </h:form>
         </f:view>
 
+        <h2>Créer un nouveau compte </h2>
+        <f:view>
+            <h:form id="register-form">
+                <h:panelGrid columns="2">
+                    <h:outputText value='Numero de carte de crédit'/>
+                    <h:inputText value='#{accountBean.creditCardNum}' required="true"
+                                 validatorMessage="Le numéro de carte de crédit doit compoter 10 chiffres">
+                        <f:validateRegex pattern="\d{10}+" />
+                    </h:inputText>
+                    <h:commandButton action="#{accountBean.register}" value="Register"/>
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+
     </h:body>
 
 

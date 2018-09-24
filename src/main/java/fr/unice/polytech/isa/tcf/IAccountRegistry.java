@@ -7,5 +7,5 @@ import java.util.List;
 
 @Local
 public interface IAccountRegistry {
-    void register(String creditCardNum, double initialTransfer);
+    void register(double initialTransfer);
 }
