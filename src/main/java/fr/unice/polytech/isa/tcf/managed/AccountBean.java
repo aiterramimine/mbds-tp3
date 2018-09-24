@@ -5,17 +5,19 @@ import fr.unice.polytech.isa.tcf.IAccountRegistry;
 import fr.unice.polytech.isa.tcf.components.AccountOperationsBean;
 import fr.unice.polytech.isa.tcf.components.AccountRegistryBean;
 import fr.unice.polytech.isa.tcf.entities.Account;
+import fr.unice.polytech.isa.tcf.entities.Constants;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.logging.Logger;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class AccountBean implements Serializable {
 
     @EJB private IAccountFinder finder;
@@ -26,6 +28,10 @@ public class AccountBean implements Serializable {
     private int id;
     private int balance;
     private int creditCardNum;
+
+    public double getMinTransfert() {
+        return Double.parseDouble(Constants.ACCOUNT_CREATION_MIN_TRANSFER);
+    }
 
     public int getCreditCardNum() {
         return creditCardNum;

@@ -6,12 +6,13 @@ import fr.unice.polytech.isa.tcf.IAccountFinder;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class AccountOperationBean implements Serializable {
 
     @EJB

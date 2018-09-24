@@ -37,7 +37,7 @@
 
                     <h:outputText value='Montant du dépot initial'/>
                     <h:inputText value='#{accountBean.balance}' required="true">
-
+                        <f:validateLongRange minimum='#{accountBean.minTransfert}'/>
                     </h:inputText>
 
                     <h:outputText value='Numero de carte de crédit'/>
