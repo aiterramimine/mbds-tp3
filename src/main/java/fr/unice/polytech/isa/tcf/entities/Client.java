@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -26,7 +25,7 @@ public class Client implements Serializable {
 
     @NotNull
     @DecimalMin(value="50.00", message = "Vous devez transférer au minimum 50 euros à la création du compte")
-    private double minTransfert;
+    private double initialTransfer;
 
     public int getId() {
         return id;
@@ -44,26 +43,26 @@ public class Client implements Serializable {
         this.name = name;
     }
 
-    public String getCreditCard() {
+    public String getCreditCardNum() {
         return creditCardNum;
     }
 
-    public void setCreditCard(String creditCard) {
+    public void setCreditCardNum(String creditCard) {
         this.creditCardNum = creditCard;
     }
 
-    public double getMinTransfert() {
-        return minTransfert;
+    public double getInitialTransfer() {
+        return initialTransfer;
     }
 
-    public void setMinTransfert(double minTransfert) {
-        this.minTransfert = minTransfert;
+    public void setInitialTransfer(double initialTransfer) {
+        this.initialTransfer = initialTransfer;
     }
 
     @Override
     public int hashCode() {
         int result = getName() != null ? getName().hashCode() : 0;
-        result = 31 * result + (getCreditCard() != null ? getCreditCard().hashCode() : 0);
+        result = 31 * result + (getCreditCardNum() != null ? getCreditCardNum().hashCode() : 0);
         return result;
     }
 
@@ -78,7 +77,7 @@ public class Client implements Serializable {
 
         if (getName() != null ? !getName().equals(customer.getName()) : customer.getName() != null)
             return false;
-        if (getCreditCard() != null ? !getCreditCard().equals(customer.getCreditCard()) : customer.getCreditCard() != null)
+        if (getCreditCardNum() != null ? !getCreditCardNum().equals(customer.getCreditCard()) : customer.getCreditCard() != null)
             return false;
         return true;
 
@@ -90,7 +89,7 @@ public class Client implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", creditCardNumber='" + creditCardNum + '\'' +
-                ", minimalTransfert='" + minTransfert + '\'' +
+                ", minimalTransfer='" + initialTransfer + '\'' +
                 '}';
     }
 }
