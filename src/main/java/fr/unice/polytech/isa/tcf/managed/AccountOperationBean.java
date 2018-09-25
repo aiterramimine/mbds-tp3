@@ -6,9 +6,7 @@ import fr.unice.polytech.isa.tcf.IAccountFinder;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 
@@ -25,7 +23,12 @@ public class AccountOperationBean implements Serializable {
     @EJB
     private IAccountDebitor debitor;
 
+    @ManagedProperty("#{accountBean.id}")
     private int id;
+
+    @ManagedProperty("#{accountBean.balance}")
+    private double balance;
+
     private double amount;
 
     public int getId() {
@@ -47,7 +50,7 @@ public class AccountOperationBean implements Serializable {
     public String credit() {
         if(finder.findById(id).isPresent()) {
             creditor.credit(id, amount);
-            return Signal.CREDITED_ACCOUNT;
+            return Signal.UNKOWN;
         } else {
             FacesContext.getCurrentInstance()
                     .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));
@@ -58,12 +61,20 @@ public class AccountOperationBean implements Serializable {
     public String debit() {
         if(finder.findById(id).isPresent()) {
             debitor.debit(id, amount);
-            return Signal.DEBITED_ACCOUNT;
+            return Signal.UNKOWN;
         } else {
             FacesContext.getCurrentInstance()
                     .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));
             return Signal.UNKOWN;
         }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
 }

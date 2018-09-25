@@ -26,7 +26,7 @@ public class AccountBean implements Serializable {
     private static final Logger log = Logger.getLogger(AccountBean.class.getName());
 
     private int id;
-    private int balance;
+    private double balance;
     private int creditCardNum;
 
     public double getMinTransfert() {
@@ -49,26 +49,30 @@ public class AccountBean implements Serializable {
         this.id = id;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    public void register() {
+    public String register() {
         System.out.println("Registering");
         try {
-            registry.register(getBalance());
+            id = registry.register(getBalance());
+            return Signal.CREATED_ACCOUNT;
         } catch (Exception e) {
             System.out.print("error creating account : ");
             e.printStackTrace();
+            return Signal.UNKOWN;
         }
     }
 
     public String select() {
         if(finder.findById(getId()).isPresent()) {
+            Account a = finder.findById(getId()).get();
+            balance = a.getBalance();
             return Signal.SELECTED_ACCOUNT;
         } else {
             FacesContext.getCurrentInstance()

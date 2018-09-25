@@ -36,8 +36,11 @@
                 <h:panelGrid columns="2">
 
                     <h:outputText value='Montant du dépot initial'/>
-                    <h:inputText value='#{accountBean.balance}' required="true">
+                    <h:inputText value='#{accountBean.balance}' required="true"
+                        validatorMessage="Vous devez déposer initialement un montant de #{accountBean.minTransfert}">
+
                         <f:validateLongRange minimum='#{accountBean.minTransfert}'/>
+
                     </h:inputText>
 
                     <h:outputText value='Numero de carte de crédit'/>

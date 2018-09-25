@@ -23,12 +23,14 @@ public class AccountRegistryBean implements IAccountFinder, IAccountRegistry {
     private EntityManager manager;
 
     @Override
-    public void register(double initialTransfer) {
+    public int register(double initialTransfer) {
 
         Account a = new Account();
         a.setBalance(initialTransfer);
         manager.persist(a);
+        manager.flush();
 
+        return a.getId();
     }
 
     @Override
