@@ -7,11 +7,14 @@ import fr.unice.polytech.isa.tcf.IAccountFinder;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.io.Serializable;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class AccountOperationBean implements Serializable {
 
     @EJB
@@ -23,21 +26,33 @@ public class AccountOperationBean implements Serializable {
     @EJB
     private IAccountDebitor debitor;
 
-    @ManagedProperty("#{accountBean.id}")
-    private int id;
+    @ManagedProperty(value="#{accountBean}")
+    private AccountBean accountBean;
 
-    @ManagedProperty("#{accountBean.balance}")
-    private double balance;
+    //@ManagedProperty(value="#{accountBean.id}")
+    private int id = 22;
 
-    private double amount;
+    private double amount = 10;
 
     public int getId() {
-        return id;
+        return accountBean.getId();
+    }
+
+    public AccountBean getAccountBean() {
+        return accountBean;
+    }
+
+    public void setAccountBean(AccountBean accountBean) {
+        this.accountBean = accountBean;
     }
 
     public void setId(int id) {
         this.id = id;
     }
+
+   /* public void setId(int id) {
+        this.id = id;
+    }*/
 
     public double getAmount() {
         return amount;
@@ -48,8 +63,10 @@ public class AccountOperationBean implements Serializable {
     }
 
     public String credit() {
-        if(finder.findById(id).isPresent()) {
-            creditor.credit(id, amount);
+        if(finder.findById(accountBean.getId()).isPresent()) {
+            creditor.credit(accountBean.getId(), amount);
+            accountBean.select();
+            this.amount = 0;
             return Signal.UNKOWN;
         } else {
             FacesContext.getCurrentInstance()
@@ -59,8 +76,8 @@ public class AccountOperationBean implements Serializable {
     }
 
     public String debit() {
-        if(finder.findById(id).isPresent()) {
-            debitor.debit(id, amount);
+        if(finder.findById(accountBean.getId()).isPresent()) {
+            debitor.debit(accountBean.getId(), amount);
             return Signal.UNKOWN;
         } else {
             FacesContext.getCurrentInstance()
@@ -69,12 +86,19 @@ public class AccountOperationBean implements Serializable {
         }
     }
 
-    public double getBalance() {
-        return balance;
+    public String ret() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return Signal.CREDITED_ACCOUNT;
+
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void reload() {
+        try {
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+        } catch (IOException e) {
+
+        }
     }
 
 }

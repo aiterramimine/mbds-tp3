@@ -5,53 +5,43 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <h:head>
 
-<h:head>
+        <title> Gestion de comptes bancaires </title>
 
-    <title> Gestion de comptes bancaires </title>
+    </h:head>
 
-</h:head>
+    <h:body>
 
-<h:body>
+        <h1> Gestion de comptes bancaires </h1>
 
-    <h1> Gestion de comptes bancaires </h1>
+        <h:messages id="form-error" style="color: red"/>
 
-    <h:messages id="form-error" style="color: red"/>
+        <f:view>
+            <h2>Interface de gestion du compte d'id: <h:outputText value="#{accountBean.id}"/></h2>
+        </f:view>
+        <h2>Le solde actuel du compte est : </h2>
 
-    <f:view>
-        <h2>Interface de gestion du compte d'id: #{accountOperationBean.id}</h2>
-    </f:view>
-    <h2>Le solde actuel du compte est : </h2>
+        <f:view>
+            <h:outputText is="balance" value="#{accountBean.balance}"/>
+        </f:view>
 
-    <f:view>
-        <h:outputText value="#{accountOperationBean.balance}"/>
-    </f:view>
+        <h2> Operation </h2>
 
-    <h2>Déposer </h2>
+        <f:view>
+            <h:form id="credit-form">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Montant"/>
+                    <h:inputText value="#{accountOperationBean.amount}" required="true"/>
+                    <h:commandButton action="#{accountOperationBean.credit}" value="Credit"/>
+                    <h:commandButton action="#{accountOperationBean.debit}" value="Debit"/>
+                    <h:commandButton action="#{accountOperationBean.ret}" value="Return"/>
 
-    <f:view>
-        <h:form id="credit-form">
-            <h:panelGrid columns="2">
-                <h:outputText value="Montant"/>
-                <h:inputText value="#{accountOperationBean.amount}" required="true"/>
-                <h:commandButton action="#{accountOperationBean.credit}" value="Credit"/>
-            </h:panelGrid>
-        </h:form>
-    </f:view>
+                </h:panelGrid>
+            </h:form>
+        </f:view>
 
-    <h2>Retirer </h2>
 
-    <f:view>
-        <h:form id="debit-form">
-            <h:panelGrid columns="2">
-                <h:outputText value="Montant"/>
-                <h:inputText value="#{accountOperationBean.amount}" required="true"/>
-                <h:commandButton action="#{accountOperationBean.debit}" value="Debit"/>
-            </h:panelGrid>
-        </h:form>
-    </f:view>
-
-</h:body>
-
+    </h:body>
 
 </html>
