@@ -14,4 +14,5 @@ class Signal {
     static final String CREATED_ACCOUNT = "CREATED_ACCOUNT";
     static final String CREDITED_ACCOUNT = "CREDITED_ACCOUNT";
     static final String DEBITED_ACCOUNT = "DEBITED_ACCOUNT";
+    static final String LIST_ACCOUNTS  = "LIST_ACCOUNTS";
 }

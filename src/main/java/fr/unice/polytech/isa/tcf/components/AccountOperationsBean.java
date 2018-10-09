@@ -15,6 +15,10 @@ public class AccountOperationsBean implements IAccountCreditor, IAccountDebitor 
     @PersistenceContext
     private EntityManager entityManager;
 
+    private double id;
+
+    private double balance;
+
     @EJB
     private IAccountFinder finder;
 

@@ -26,7 +26,7 @@
 
         <navigation-case>
             <from-outcome>CREDITED_ACCOUNT</from-outcome>
-            <to-view-id>/customer.xhtml</to-view-id>
+            <to-view-id>/create_account.xhtml?faces-redirect=true&amp;includeViewParams=true"</to-view-id>
         </navigation-case>
 
         <navigation-case>
@@ -47,6 +47,11 @@
         <navigation-case>
             <from-outcome>CREATED_ACCOUNT</from-outcome>
             <to-view-id>/credit.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>LIST_ACCOUNTS</from-outcome>
+            <to-view-id>/list_accounts.xhtml</to-view-id>
         </navigation-case>
 
     </navigation-rule>

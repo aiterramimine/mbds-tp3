@@ -20,27 +20,28 @@ public class AccountRegistryBean implements IAccountFinder, IAccountRegistry {
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
     @PersistenceContext
-    private EntityManager manager;
+    private EntityManager em;
 
     @Override
-    public int register(double initialTransfer) {
+    public int register(double initialTransfer, String clientName) {
 
         Account a = new Account();
         a.setBalance(initialTransfer);
-        manager.persist(a);
-        manager.flush();
+        a.setClientName(clientName);
+        em.persist(a);
+        em.flush();
 
         return a.getId();
     }
 
     @Override
     public Optional<Account> findById(int id) {
-        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Account> criteria = builder.createQuery(Account.class);
         Root<Account> root = criteria.from(Account.class);
         criteria.select(root).where(builder.equal(root.get("id"), id));
 
-        TypedQuery<Account> query = manager.createQuery(criteria);
+        TypedQuery<Account> query = em.createQuery(criteria);
 
         try {
             return Optional.of(query.getSingleResult());
@@ -49,4 +50,14 @@ public class AccountRegistryBean implements IAccountFinder, IAccountRegistry {
             return Optional.empty();
         }
     }
+
+    @Override
+    public List<Account> findAll() {
+
+        TypedQuery<Account> query = em.createNamedQuery("findAllAccounts", Account.class);
+
+        return query.getResultList();
+    }
+
+
 }

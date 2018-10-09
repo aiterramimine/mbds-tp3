@@ -26,7 +26,7 @@ public class CartStatelessBean extends CartBean {
 	@Override
 	public Set<Item> contents(Customer customer) {
 		Customer c = entityManager.merge(customer);
-		return c.getCart();
+		return  c.getCart();
 	}
 
 }
