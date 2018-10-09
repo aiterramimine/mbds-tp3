@@ -7,6 +7,10 @@ import java.io.Serializable;
 
 @Entity
 @Table(name= "accounts")
+@NamedQuery(
+        name="findAllAccounts",
+        query="SELECT a FROM Account a"
+)
 public class Account implements Serializable {
 
     @Id

@@ -7,5 +7,5 @@ import java.util.List;
 
 @Local
 public interface IAccountRegistry {
-    int register(double initialTransfer);
+    int register(double initialTransfer, String cilentName);
 }

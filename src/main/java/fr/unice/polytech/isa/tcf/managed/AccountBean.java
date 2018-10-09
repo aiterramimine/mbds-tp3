@@ -28,8 +28,12 @@ public class AccountBean implements Serializable {
     private static final Logger log = Logger.getLogger(AccountBean.class.getName());
 
     private int id;
+
     private double balance;
+
     private int creditCardNum;
+
+    private String clientName;
 
     public double getMinTransfert() {
         return Double.parseDouble(Constants.ACCOUNT_CREATION_MIN_TRANSFER);
@@ -62,7 +66,7 @@ public class AccountBean implements Serializable {
     public String register() {
         System.out.println("Registering");
         try {
-            id = registry.register(getBalance());
+            id = registry.register(getBalance(), getClientName());
             return "credit?faces-redirect=true&includeViewParams=true";
         } catch (Exception e) {
             System.out.print("error creating account : ");
@@ -81,5 +85,17 @@ public class AccountBean implements Serializable {
                     .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));
             return Signal.UNKOWN;
         }
+    }
+
+    public String list() {
+        return "list_accounts?faces-redirect=true&includeViewParams=true";
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 }

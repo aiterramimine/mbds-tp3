@@ -49,6 +49,11 @@
             <to-view-id>/credit.xhtml</to-view-id>
         </navigation-case>
 
+        <navigation-case>
+            <from-outcome>LIST_ACCOUNTS</from-outcome>
+            <to-view-id>/list_accounts.xhtml</to-view-id>
+        </navigation-case>
+
     </navigation-rule>
 
     <navigation-rule>
