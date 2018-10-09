@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.logging.Logger;
 
 @ManagedBean(name="accountBean")
-@SessionScoped
+@RequestScoped
 public class AccountBean implements Serializable {
 
     @EJB private IAccountFinder finder;
@@ -63,7 +63,7 @@ public class AccountBean implements Serializable {
         System.out.println("Registering");
         try {
             id = registry.register(getBalance());
-            return Signal.CREATED_ACCOUNT;
+            return "credit?faces-redirect=true&includeViewParams=true";
         } catch (Exception e) {
             System.out.print("error creating account : ");
             e.printStackTrace();
@@ -75,7 +75,7 @@ public class AccountBean implements Serializable {
         if(finder.findById(getId()).isPresent()) {
             Account a = finder.findById(getId()).get();
             balance = a.getBalance();
-            return Signal.SELECTED_ACCOUNT;
+            return "credit?faces-redirect=true&includeViewParams=true";
         } else {
             FacesContext.getCurrentInstance()
                     .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));

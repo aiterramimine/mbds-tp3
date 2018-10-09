@@ -26,7 +26,7 @@
 
         <navigation-case>
             <from-outcome>CREDITED_ACCOUNT</from-outcome>
-            <to-view-id>/create_account.xhtml?faces-redirect=tru</to-view-id>
+            <to-view-id>/create_account.xhtml?faces-redirect=true&amp;includeViewParams=true"</to-view-id>
         </navigation-case>
 
         <navigation-case>

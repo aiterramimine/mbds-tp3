@@ -4,8 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-    <h:head>
+    <f:metadata>
+        <f:viewParam name="id" value="#{accountBean.id}"/>
+    </f:metadata>
+<h:head>
 
         <title> Gestion de comptes bancaires </title>
 
@@ -18,12 +20,12 @@
         <h:messages id="form-error" style="color: red"/>
 
         <f:view>
-            <h2>Interface de gestion du compte d'id: <h:outputText value="#{accountBean.id}"/></h2>
+            <h2>Interface de gestion du compte d'id: <h:outputText value="#{accountOperationBean.id}"/></h2>
         </f:view>
         <h2>Le solde actuel du compte est : </h2>
 
         <f:view>
-            <h:outputText is="balance" value="#{accountBean.balance}"/>
+            <h:outputText is="balance" value="#{accountOperationBean.balance}"/>
         </f:view>
 
         <h2> Operation </h2>
