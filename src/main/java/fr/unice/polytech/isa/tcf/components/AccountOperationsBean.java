@@ -48,13 +48,13 @@ public class AccountOperationsBean implements IAccountCreditor, IAccountDebitor 
     }
 
 //    public void deposit(int id, int montant) {
-//       /* Account account = register.getAccountById(id);
+//       /* Account account = create.getAccountById(id);
 //        account.setBalance(account.getBalance() + montant);*/
 //    }
 //
 //    @Override
 //    public int withdraw(int id, int amount) {
-//       /* Account account = register.getAccountById(id);
+//       /* Account account = create.getAccountById(id);
 //        if (amount < account.getBalance()) {
 //            account.setBalance(account.getBalance() - amount);
 //            return amount;

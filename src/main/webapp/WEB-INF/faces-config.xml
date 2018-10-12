@@ -4,6 +4,7 @@
                                   http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
               version="2.0">
 
+
     <navigation-rule>
 
         <from-view-id>/customer.xhtml</from-view-id>
@@ -22,11 +23,11 @@
 
     <navigation-rule>
 
-        <from-view-id>/credit.xhtml</from-view-id>
+        <from-view-id>/accounts/manage.xhtml</from-view-id>
 
         <navigation-case>
             <from-outcome>CREDITED_ACCOUNT</from-outcome>
-            <to-view-id>/create_account.xhtml?faces-redirect=true&amp;includeViewParams=true"</to-view-id>
+            <to-view-id>/accounts/index.xhtml?faces-redirect=true&amp;includeViewParams=true"</to-view-id>
         </navigation-case>
 
         <navigation-case>
@@ -37,21 +38,21 @@
 
     <navigation-rule>
 
-        <from-view-id>/create_account.xhtml</from-view-id>
+        <from-view-id>/accounts/index.xhtml</from-view-id>
 
         <navigation-case>
             <from-outcome>SELECTED_ACCOUNT</from-outcome>
-            <to-view-id>/credit.xhtml</to-view-id>
+            <to-view-id>/accounts/manage.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>CREATED_ACCOUNT</from-outcome>
-            <to-view-id>/credit.xhtml</to-view-id>
+            <to-view-id>/accounts/manage.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>LIST_ACCOUNTS</from-outcome>
-            <to-view-id>/list_accounts.xhtml</to-view-id>
+            <to-view-id>/accounts/catalog.xhtml</to-view-id>
         </navigation-case>
 
     </navigation-rule>

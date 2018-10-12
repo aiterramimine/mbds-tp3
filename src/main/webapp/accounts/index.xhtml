@@ -15,7 +15,7 @@
 
     <h:body>
 
-        <h1> Gestion de comptes bancaires </h1>
+        <h1> Gestion de comptes bancairesiiiiii </h1>
 
         <h:messages id="form-error" style="color: red"/>
 
@@ -39,10 +39,9 @@
                     <h:inputText value='#{accountBean.clientName}' required="true">
                     </h:inputText>
 
-                    <h:outputText value='Montant du dépot initial :'/>
+                    <h:outputText value='Montant du dépot initial : €'/>
                     <h:inputText value='#{accountBean.balance}' required="true"
                         validatorMessage="Vous devez déposer initialement un montant de #{accountBean.minTransfert}">
-
                         <f:validateLongRange minimum='#{accountBean.minTransfert}'/>
                     </h:inputText>
 
@@ -51,7 +50,7 @@
                     <h:inputText value='#{accountBean.creditCardNum}' required="true">
                     </h:inputText>
 
-                    <h:commandButton action="#{accountBean.register}" value="Register"/>
+                    <h:commandButton action="#{accountBean.create}" value="Register"/>
 
                 </h:panelGrid>
             </h:form>
@@ -61,7 +60,7 @@
         <f:view>
             <h:form id="list-form">
                 <h:panelGrid columns="2">
-                    <h:commandButton action="#{accountBean.list}" value="Liste" />
+                    <h:commandButton action="#{accountBean.search}" value="Recherche" />
                 </h:panelGrid>
             </h:form>
         </f:view>

@@ -21,6 +21,7 @@
         <versions.tomee>7.0.2</versions.tomee>
         <versions.openjpa>2.4.1</versions.openjpa>
         <versions.myface>2.2.10</versions.myface>
+        <versions.bootsfaces>1.3.0</versions.bootsfaces>
         <!-- Testing dependencies -->
         <versions.maven.surefire>2.19.1</versions.maven.surefire>
         <versions.junit>4.12</versions.junit>
@@ -76,6 +77,15 @@
             <version>${versions.myface}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Dependencies for the JSF Bootsrap and JQuerry framework (provided) -->
+        <dependency>
+            <groupId>net.bootsfaces</groupId>
+            <artifactId>bootsfaces</artifactId>
+            <version>${versions.bootsfaces}</version>
+            <scope>compile</scope>
+        </dependency>
+
+
         <!-- Dependencies for the testing frameworks (Junit, Mockito & Arquillian) (tests only) -->
         <dependency>
             <groupId>junit</groupId>

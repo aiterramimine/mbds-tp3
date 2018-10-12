@@ -34,10 +34,10 @@
             <h:form id="credit-form">
                 <h:panelGrid columns="2">
                     <h:outputText value="Montant"/>
-                    <h:inputText value="#{accountOperationBean.amount}" required="true"/>
+                    <h:inputText value="#{accountOperationBean.amount}"/>
                     <h:commandButton action="#{accountOperationBean.credit}" value="Credit"/>
                     <h:commandButton action="#{accountOperationBean.debit}" value="Debit"/>
-                    <h:commandButton action="#{accountOperationBean.ret}" value="Return"/>
+                    <h:commandButton action="#{accountOperationBean.previousPage}" value="Return"/>
 
                 </h:panelGrid>
             </h:form>

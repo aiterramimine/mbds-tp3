@@ -27,59 +27,19 @@ public class AccountBean implements Serializable {
 
     private static final Logger log = Logger.getLogger(AccountBean.class.getName());
 
-    private int id;
+    private Integer id;
 
-    private double balance;
+    private Double balance;
 
-    private int creditCardNum;
+    private Integer creditCardNum;
 
     private String clientName;
-
-    public double getMinTransfert() {
-        return Double.parseDouble(Constants.ACCOUNT_CREATION_MIN_TRANSFER);
-    }
-
-    public int getCreditCardNum() {
-        return creditCardNum;
-    }
-
-    public void setCreditCardNum(int creditCardNum) {
-        this.creditCardNum = creditCardNum;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public String register() {
-        System.out.println("Registering");
-        try {
-            id = registry.register(getBalance(), getClientName());
-            return "credit?faces-redirect=true&includeViewParams=true";
-        } catch (Exception e) {
-            System.out.print("error creating account : ");
-            e.printStackTrace();
-            return Signal.UNKOWN;
-        }
-    }
 
     public String select() {
         if(finder.findById(getId()).isPresent()) {
             Account a = finder.findById(getId()).get();
             balance = a.getBalance();
-            return "credit?faces-redirect=true&includeViewParams=true";
+            return "manage?faces-redirect=true&includeViewParams=true";
         } else {
             FacesContext.getCurrentInstance()
                     .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));
@@ -87,8 +47,22 @@ public class AccountBean implements Serializable {
         }
     }
 
-    public String list() {
-        return "list_accounts?faces-redirect=true&includeViewParams=true";
+    public String create() {
+        System.out.println("Registering");
+        try {
+            id = registry.register(getBalance(), getClientName());
+            return "manage?faces-redirect=true&includeViewParams=true";
+        } catch (Exception e) {
+            System.out.print("error creating account : ");
+            e.printStackTrace();
+            return Signal.UNKOWN;
+        }
+    }
+
+
+    public String search() {
+        System.out.println("Clicked on the button");
+        return "catalog?faces-redirect=true&includeViewParams=true";
     }
 
     public String getClientName() {
@@ -97,5 +71,33 @@ public class AccountBean implements Serializable {
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
+    }
+
+    public Double getMinTransfert() {
+        return Double.parseDouble(Constants.ACCOUNT_CREATION_MIN_TRANSFER);
+    }
+
+    public Integer getCreditCardNum() {
+        return creditCardNum;
+    }
+
+    public void setCreditCardNum(Integer creditCardNum) {
+        this.creditCardNum = creditCardNum;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 }

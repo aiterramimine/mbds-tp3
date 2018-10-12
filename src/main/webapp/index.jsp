@@ -1,4 +1,4 @@
 <%@ page session="false" %>
 <%
-    response.sendRedirect("create_account.jsf");
+    response.sendRedirect("user/login.jsf");
 %>

@@ -32,7 +32,7 @@ public class AccountOperationBean implements Serializable {
 
     private double balance;
 
-    private double amount;
+    private Double amount;
 
     @PostConstruct
     public void cons() {
@@ -45,7 +45,7 @@ public class AccountOperationBean implements Serializable {
         if(finder.findById(id).isPresent()) {
             creditor.credit(id, amount);
             updateFromAccount();
-           // accountBean.select();
+            setAmount(null);
             return Signal.UNKOWN;
         } else {
             FacesContext.getCurrentInstance()
@@ -57,6 +57,7 @@ public class AccountOperationBean implements Serializable {
     public String debit() {
         if(finder.findById(id).isPresent()) {
             debitor.debit(id, amount);
+            setAmount(null);
             return Signal.UNKOWN;
         } else {
             FacesContext.getCurrentInstance()
@@ -65,19 +66,9 @@ public class AccountOperationBean implements Serializable {
         }
     }
 
-    public String ret() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return Signal.CREDITED_ACCOUNT;
+    public String previousPage() {
+        return "index?faces-redirect=true";
 
-    }
-
-    public void reload() {
-        try {
-            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-            ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
-        } catch (IOException e) {
-
-        }
     }
 
     /**
@@ -106,11 +97,11 @@ public class AccountOperationBean implements Serializable {
         this.balance = balance;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
