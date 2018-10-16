@@ -9,10 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.io.Serializable;
 
 @ManagedBean
@@ -38,20 +35,33 @@ public class AccountOperationBean implements Serializable {
     public void cons() {
            // Gets the id of the account from the view params.
            id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
-           updateFromAccount();
+           synchronizeWithAccount();
     }
 
     public String credit() {
+
+        if(amount == null) {
+            FacesContext.getCurrentInstance()
+                    .addMessage("from-error",
+                            new FacesMessage("Veuillez entrer le montant afin de créditer le compte"));
+            return null;
+        }
+
         if(finder.findById(id).isPresent()) {
             creditor.credit(id, amount);
-            updateFromAccount();
-            setAmount(null);
-            return Signal.UNKOWN;
-        } else {
+            synchronizeWithAccount();
             FacesContext.getCurrentInstance()
-                    .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));
-            return Signal.UNKOWN;
+                    .addMessage("form-success",
+                            new FacesMessage("Le montant " + getAmount() + " Euros a été crédité" +
+                                    "sur votre compte avec succès"));
+            setAmount(null);
+            return null;
         }
+
+        FacesContext.getCurrentInstance()
+                .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));
+        return null;
+
     }
 
     public String debit() {
@@ -74,7 +84,7 @@ public class AccountOperationBean implements Serializable {
     /**
      * Updates the fields of the object from the current status of the account in the database.
      */
-    public void updateFromAccount() {
+    public void synchronizeWithAccount() {
         if(finder.findById(getId()).isPresent()) {
             Account a = finder.findById(getId()).get();
             balance = a.getBalance();

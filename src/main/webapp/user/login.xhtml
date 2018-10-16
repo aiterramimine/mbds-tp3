@@ -18,7 +18,8 @@
 
     <h1 class="title-primary"> Gestion de comptes bancaires </h1>
 
-    <h:messages id="form-error" style="color: red"/>
+    <h:messages id="form-error" style="color: green"/>
+    <h:messages id="form-success" style="color: green" />
 
     <h2>Veuillez vous identifier (Par défaut dirige à la page d'acceuil de gestion de comptes bancaires)</h2>
 
@@ -30,7 +31,6 @@
             passwordValue = "#{userLoginBean.password}"
             loginButtonLabel = "Connection"
             loginButtonAction = "#{userLoginBean.login}" />
-    
 
 </h:body>
 

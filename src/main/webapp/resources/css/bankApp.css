@@ -1,3 +1,11 @@
 .title-primary {
     color: purple;
 }
+
+#form-success {
+    color: green;
+}
+
+#form-error {
+    color: red;
+}
