@@ -48,11 +48,12 @@ public class PersonBean implements Serializable {
         System.out.println("Registering");
         try {
             id = registry.register(getName(), getAddress());
+            System.out.println("registered");
             return "../accounts/index?faces-redirect=true&includeViewParams=true";
         } catch (Exception e) {
             System.out.print("error creating person : ");
             e.printStackTrace();
-            return Signal.UNKOWN;
+            return "../accounts/index?faces-redirect=true&includeViewParams=true";
         }
     }
 

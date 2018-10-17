@@ -11,6 +11,7 @@
         <class>fr.unice.polytech.isa.tcf.entities.Item</class>
         <class>fr.unice.polytech.isa.tcf.entities.Order</class>
         <class>fr.unice.polytech.isa.tcf.entities.Account</class>
+        <class>fr.unice.polytech.isa.tcf.entities.Person</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
