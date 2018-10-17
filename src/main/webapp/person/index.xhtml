@@ -33,12 +33,15 @@
             <h:inputText value='#{personBean.address}' required="true">
                 </h:inputText>
 
-            <h:outputText value='Advisor ID : '/>
-            <h:inputText value='#{personBean.advisorID}' id="advisorID" disabled="true"></h:inputText>
+            <h:outputText id="advisorIDLabel" value='Advisor ID : '/>
+            <h:inputText id="advisorIDText" name="advisorID">
+                </h:inputText>
 
-            <input type="checkbox" name="id" value="admin">Admin</input>
-            <input type="checkbox" name="id" value="advisor">Advisor</input>
-            <input type="checkbox" name="id" value="client" onclick="checkClient(this)">Client</input>
+            <select name="role" onchange="checkClient(this)">
+                <option value="Client">Client</option>
+                <option value="Advisor">Advisor</option>
+                <option value="Administrator">Administrator</option>
+            </select>
 
             <h:commandButton action="#{personBean.create()}" value="Register"/>
 
@@ -48,10 +51,12 @@
 
     <script type="text/javascript">
         function checkClient(e) {
-            if (e.checked) {
-                document.getElementById("register-form:advisorID").disabled = false;
+            if (e.value == "Client") {
+                document.getElementById("register-form:advisorIDLabel").hidden = false;
+                document.getElementById("register-form:advisorIDText").hidden = false;
             } else {
-                document.getElementById("register-form:advisorID").disabled = true;
+                document.getElementById("register-form:advisorIDLabel").hidden = true;
+                document.getElementById("register-form:advisorIDText").hidden = true;
             }
         }
     </script>

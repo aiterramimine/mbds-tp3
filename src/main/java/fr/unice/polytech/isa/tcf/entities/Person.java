@@ -9,7 +9,7 @@ import java.io.Serializable;
         name="findAllPersons",
         query="SELECT p FROM Person p WHERE p.id = :id"
 )
-public class Person implements Serializable {
+public abstract class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
