@@ -85,6 +85,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>6.0</version>
+            <scope>compile</scope>
+        </dependency>
+
 
         <!-- Dependencies for the testing frameworks (Junit, Mockito & Arquillian) (tests only) -->
         <dependency>

@@ -18,7 +18,6 @@ public class Account implements Serializable {
 
     private Client owner;
 
-    @DecimalMin(value = Constants.ACCOUNT_CREATION_MIN_TRANSFER, message="Le montant minimal du dépot initial est 50.00 euros")
     private double balance;
 
     private Collection<Client> comanagers;

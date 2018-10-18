@@ -9,3 +9,15 @@
 #form-error {
     color: red;
 }
+
+.balance.creditor {
+    color: green;
+}
+
+.balance.debitor {
+    color: black;
+}
+
+.balance.decouvert {
+    color: red;
+}

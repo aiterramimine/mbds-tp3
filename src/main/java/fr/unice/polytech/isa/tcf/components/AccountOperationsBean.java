@@ -32,18 +32,11 @@ public class AccountOperationsBean implements IAccountCreditor, IAccountDebitor 
     }
 
     @Override
-    public double debit(int accountId, double amount) {
+    public void debit(int accountId, double amount) {
         Optional<Account> optionalAccount = finder.findById(accountId);
         if (optionalAccount.isPresent()) {
             Account account = optionalAccount.get();
-            if (amount < account.getBalance()) {
-                account.setBalance(account.getBalance() - amount);
-                return amount;
-            } else {
-                return 0;
-            }
-        } else {
-            return 0;
+            account.setBalance(account.getBalance() - amount);
         }
     }
 

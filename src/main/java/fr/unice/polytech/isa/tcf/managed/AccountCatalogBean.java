@@ -34,4 +34,11 @@ public class AccountCatalogBean implements Serializable {
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
     }
+
+    public String getBalanceStyle(Double balance) {
+        if(balance < 0)
+            return "decouvert";
+        return "creditor";
+    }
+
 }

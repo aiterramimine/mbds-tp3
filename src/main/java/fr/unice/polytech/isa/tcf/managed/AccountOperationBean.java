@@ -4,6 +4,7 @@ import fr.unice.polytech.isa.tcf.IAccountCreditor;
 import fr.unice.polytech.isa.tcf.IAccountDebitor;
 import fr.unice.polytech.isa.tcf.IAccountFinder;
 import fr.unice.polytech.isa.tcf.entities.Account;
+import org.primefaces.context.RequestContext;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -65,15 +66,28 @@ public class AccountOperationBean implements Serializable {
     }
 
     public String debit() {
+        if(amount == null) {
+            FacesContext.getCurrentInstance()
+                    .addMessage("from-error",
+                            new FacesMessage("Veuillez entrer le montant afin de créditer le compte"));
+            return null;
+        }
+
         if(finder.findById(id).isPresent()) {
             debitor.debit(id, amount);
-            setAmount(null);
-            return Signal.UNKOWN;
-        } else {
+            synchronizeWithAccount();
             FacesContext.getCurrentInstance()
-                    .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));
-            return Signal.UNKOWN;
+                    .addMessage("form-success",
+                            new FacesMessage("Le montant " + getAmount() + " Euros a été crédité " +
+                                    "sur votre compte avec succès"));
+            RequestContext.getCurrentInstance().execute("hideMessages()");
+            setAmount(null);
+            return null;
         }
+
+        FacesContext.getCurrentInstance()
+                .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));
+        return null;
     }
 
     public String previousPage() {

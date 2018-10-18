@@ -5,6 +5,6 @@ import javax.ejb.Local;
 @Local
 public interface IAccountDebitor {
 
-    double debit(int accountId, double amount);
+    void debit(int accountId, double amount);
 
 }

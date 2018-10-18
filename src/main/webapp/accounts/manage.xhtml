@@ -3,7 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:b="http://bootsfaces.net/ui">
     <f:metadata>
         <f:viewParam name="id" value="#{accountBean.id}"/>
     </f:metadata>
@@ -16,8 +16,6 @@
     <h:body>
 
         <h1> Gestion de comptes bancaires </h1>
-
-        <h:messages id="form-error" style="color: red"/>
 
         <f:view>
             <h2>Interface de gestion du compte d'id: <h:outputText value="#{accountOperationBean.id}"/></h2>
@@ -43,7 +41,35 @@
             </h:form>
         </f:view>
 
+        <b:messages id="form-success"/>
+
 
     </h:body>
 
+    <script type="text/javascript">
+
+        console.log('Hello world!');
+
+        function hideMessages() {
+            console.log('Hiding the messages');
+            setTimeout(function() {
+                document.querySelector('#form-success').style.display = 'none';
+            }, 2000);
+
+        }
+
+        window.onbeforeunload = function (e) {
+            var e = e || window.event;
+            var msg = "Do you really want to leave this page?"
+
+            // For IE and Firefox
+            if (e) {
+                e.returnValue = msg;
+            }
+
+            // For Safari / chrome
+            return msg;
+        };
+
+    </script>
 </html>

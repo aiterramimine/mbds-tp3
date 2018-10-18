@@ -9,70 +9,52 @@
 
 <h:head>
 
+    <h:outputStylesheet library="css" name="bankApp.css" />
     <title> Liste des comptes ouverts dans la banque </title>
 
 </h:head>
 
 <h:body>
 
-    <b:row>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-        <b:column span="1"><h:outputText value="span=1"/></b:column>
-    </b:row>
-    <b:row>
-        <b:column span="8"><h:outputText value="span=8"/></b:column>
-        <b:column span="4"><h:outputText value="span=4"/></b:column>
-    </b:row>
-    <b:row>
-        <b:column span="4"><h:outputText value="span=4"/></b:column>
-        <b:column span="4"><h:outputText value="span=4"/></b:column>
-        <b:column span="4"><h:outputText value="span=4"/></b:column>
-    </b:row>
-    <b:row>
-        <b:column span="6"><h:outputText value="span=6"/></b:column>
-        <b:column span="6"><h:outputText value="span=6"/></b:column>
-    </b:row>
-
     <h1> Liste de comptes de la banque </h1>
 
-    <h:messages id="form-error" style="color: red"/>
+    <!--<b:messages id="form-error" severity="error,fatal"/>-->
+
+    <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
+
+    <b:growl id="form-error"
+             globalOnly="true"
+             showDetail="true"
+             severity="info,warn"/>
 
     <h2>Séléctionnnez un compte bancaire existant</h2>
 
-        <h:dataTable value="#{accountCatalogBean.accounts}" var="account">
-            <p>helloooo</p>
-            <h:column>
-                <f:facet name="header">id</f:facet>
-                <h:outputText value="#{account.id}"> <!-- link -->
-                <!--    <f:param name="id" value="#{account.id}" />
-                    <f:param name="balance" value="#{account.balance}" />-->
-                </h:outputText>
-            </h:column>
+    <h:form>
+            <b:message />
 
-            <h:column>
-                <f:facet name="header">balance</f:facet>
-                <h:outputText value="$ #{account.balance}">
-                <!--    <f:param name="id" value="#{account.id}" />-->
-                </h:outputText>
-            </h:column>
+        <b:dataTable value="#{accountCatalogBean.accounts}"
+                     var="account"
+                     class="editableAccountTable"
+                     csv="true">
 
-            <h:column>
-                <f:facet name="header">client_name</f:facet>
-                <h:outputText value="#{account.clientName}">
-                <!--    <f:param name="id" value="#{account.id}" />-->
-                </h:outputText>
-            </h:column>
-        </h:dataTable>
+            <b:dataTableColumn value="#{account.id}"/>
+            <b:dataTableColumn value="#{account.clientName}" />
+            <b:dataTableColumn>
+                <f:facet name="header">
+                    <h:outputText value="Solde (€)" />
+                </f:facet>
+                <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
+            </b:dataTableColumn>
+            <b:dataTableColumn label="Actions">
+                <b:commandButton value="Gérer" icon="edit">
+                </b:commandButton>
+            </b:dataTableColumn>
+        </b:dataTable>
+        <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
+
+    </h:form>
+
+
 
 
 </h:body>
