@@ -2,6 +2,7 @@ package fr.unice.polytech.isa.tcf.components;
 
 import fr.unice.polytech.isa.tcf.ClientFinder;
 import fr.unice.polytech.isa.tcf.ClientRegistration;
+import fr.unice.polytech.isa.tcf.entities.Advisor;
 import fr.unice.polytech.isa.tcf.entities.Client;
 import fr.unice.polytech.isa.tcf.entities.Customer;
 import fr.unice.polytech.isa.tcf.exceptions.AlreadyExistingClientException;
@@ -30,6 +31,20 @@ public class ClientRegistryBean implements ClientFinder, ClientRegistration {
 
         manager.persist(c);
 
+    }
+
+    @Override
+    public int register(String name, String address, Advisor advisor) throws AlreadyExistingClientException {
+        if (findByName(name).isPresent()) {
+            throw new AlreadyExistingClientException(name);
+        }
+
+        Client c = new Client(name, address);
+        c.setAdvisor(advisor);
+
+        manager.persist(c);
+
+        return c.getId();
     }
 
     @Override

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface AdvisorFinder {
 
-    List<Advisor> findAllAdvisors();
+    List<Advisor> findAll();
+
+    Advisor findById(int id);
 
 }

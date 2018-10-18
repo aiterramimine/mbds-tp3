@@ -1,6 +1,7 @@
 package fr.unice.polytech.isa.tcf.managed;
 
 import fr.unice.polytech.isa.tcf.AdministratorRegistration;
+import fr.unice.polytech.isa.tcf.AdvisorFinder;
 import fr.unice.polytech.isa.tcf.AdvisorRegistration;
 import fr.unice.polytech.isa.tcf.ClientRegistration;
 import fr.unice.polytech.isa.tcf.entities.Advisor;
@@ -11,6 +12,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Logger;
 
 @ManagedBean(name="personBean")
@@ -22,6 +24,8 @@ public class PersonBean implements Serializable {
     @EJB private AdvisorRegistration advisorRegistration;
 
     @EJB private ClientRegistration clientRegistration;
+
+    @EJB private AdvisorFinder advisorFinder;
 
     private static final Logger log = Logger.getLogger(AccountBean.class.getName());
 
@@ -54,11 +58,15 @@ public class PersonBean implements Serializable {
 
             System.out.println("Trying to create " + role + " with name " + name + " and ADDRESS : " + address);
 
-            if (role == "Client") {
-                int idAdvisor = Integer.parseInt(req.getParameter("idAdvisor"));
-                //ToDo : client registration
 
-            } else if (role == "Administrator") {
+            if (role.equals("Client")) {
+                int idAdvisor = Integer.parseInt(req.getParameter("idAdvisor"));
+                Advisor advisor = advisorFinder.findById(idAdvisor);
+
+                idCreated = clientRegistration.register(name, address, advisor);
+                System.out.print("New client : " + idCreated + " | advisor : " + advisor.getName() + " | ");
+
+            } else if (role.equals("Administrator")) {
                 idCreated = administratorRegistration.register(getName(), getAddress());
                 System.out.print("New administrator : " + idCreated + " | ");
             } else {
@@ -79,6 +87,10 @@ public class PersonBean implements Serializable {
     public String search() {
         System.out.println("Clicked on the button");
         return "catalog?faces-redirect=true&includeViewParams=true";
+    }
+
+    public List<Advisor> getAllAdvisors() {
+        return advisorFinder.findAll();
     }
 
     public Integer getId() {

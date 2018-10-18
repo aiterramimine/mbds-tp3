@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:tp = "http://java.sun.com/jsf/composite/custom_components">
+      xmlns:tp="http://java.sun.com/jsf/composite/custom_components" xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 
 <h:head>
@@ -22,41 +22,50 @@
     <h:messages id="form-error" style="color: red"/>
 
     <f:view>
-    <h:form id="register-form">
-        <h:panelGrid columns="2">
+        <h:form id="register-form">
+            <h:panelGrid columns="2">
 
-            <h:outputText value='Nom de la personne :'/>
-            <h:inputText value='#{personBean.name}' required="true">
-                </h:inputText>
+                <h:outputText value='Nom de la personne :'/>
+                <h:inputText value='#{personBean.name}' required="true">
+                    </h:inputText>
 
-            <h:outputText value='Addresse : '/>
-            <h:inputText value='#{personBean.address}' required="true">
-                </h:inputText>
+                <h:outputText value='Addresse : '/>
+                <h:inputText value='#{personBean.address}' required="true">
+                    </h:inputText>
 
-            <h:outputText id="advisorIDLabel" value='Advisor ID : '/>
-            <h:inputText id="advisorIDText" name="advisorID">
-                </h:inputText>
+                <!--<h:outputText id="advisorIDLabel" value='Advisor ID : '/>-->
+                <!--<h:inputText id="advisorIDText" name="advisorID">-->
+                    <!--</h:inputText>-->
 
-            <select name="role" onchange="checkClient(this)">
-                <option value="Client">Client</option>
-                <option value="Advisor">Advisor</option>
-                <option value="Administrator">Administrator</option>
+            </h:panelGrid>
+
+                <h:outputText value='Role : '/>
+                <select name="role" onchange="checkClient(this)">
+                    <option value="Client">Client</option>
+                    <option value="Advisor">Advisor</option>
+                    <option value="Administrator">Administrator</option>
+                </select>
+
+            <h:outputText value='Advisor : ' id="advisorLabel"/>
+            <select name="idAdvisor" id="DDadvisor">
+                <c:forEach var="adv" items="#{personBean.getAllAdvisors()}">
+                    <option value="#{adv.id}">#{adv.name}</option>
+                </c:forEach>
             </select>
 
             <h:commandButton action="#{personBean.create()}" value="Register"/>
 
-            </h:panelGrid>
         </h:form>
     </f:view>
 
     <script type="text/javascript">
         function checkClient(e) {
             if (e.value == "Client") {
-                document.getElementById("register-form:advisorIDLabel").hidden = false;
-                document.getElementById("register-form:advisorIDText").hidden = false;
+                document.getElementById("register-form:advisorLabel").hidden = false;
+                document.getElementById("DDadvisor").hidden = false;
             } else {
-                document.getElementById("register-form:advisorIDLabel").hidden = true;
-                document.getElementById("register-form:advisorIDText").hidden = true;
+                document.getElementById("register-form:advisorLabel").hidden = true;
+                document.getElementById("DDadvisor").hidden = true;
             }
         }
     </script>
