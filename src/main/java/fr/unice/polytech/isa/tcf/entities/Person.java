@@ -5,10 +5,8 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-@NamedQuery(
-        name="findAllPersons",
-        query="SELECT p FROM Person p WHERE p.id = :id"
-)
+@MappedSuperclass
+@Access(AccessType.PROPERTY)
 public abstract class Person implements Serializable {
 
     @Id
@@ -21,8 +19,20 @@ public abstract class Person implements Serializable {
     @NotNull
     protected String address;
 
+    public Person() {
+    }
+
+    public Person(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

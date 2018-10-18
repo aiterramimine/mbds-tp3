@@ -14,6 +14,7 @@
         <class>fr.unice.polytech.isa.tcf.entities.Person</class>
         <class>fr.unice.polytech.isa.tcf.entities.Advisor</class>
         <class>fr.unice.polytech.isa.tcf.entities.Administrator</class>
+        <class>fr.unice.polytech.isa.tcf.entities.Client</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 

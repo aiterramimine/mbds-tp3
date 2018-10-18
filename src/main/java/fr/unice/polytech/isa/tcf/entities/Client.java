@@ -1,23 +1,15 @@
 package fr.unice.polytech.isa.tcf.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
-public class Client implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    @NotNull
-    private String name;
+public class Client extends Person implements Serializable {
 
     @NotNull
     @Pattern(regexp = "\\d{10}+", message = "Numéro de carte de crédit invalide")
@@ -27,20 +19,23 @@ public class Client implements Serializable {
     @DecimalMin(value="50.00", message = "Vous devez transférer au minimum 50 euros à la création du compte")
     private double initialTransfer;
 
-    public int getId() {
-        return id;
+    private Advisor advisor;
+
+    private Collection<Account> ownAccounts;
+
+    private Collection<Account> comanagedAccounts;
+
+
+    public Client() {
+        super();
+        ownAccounts = new ArrayList<>();
+        comanagedAccounts = new ArrayList<>();
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Client(String name, String address) {
+        super(name, address);
+        ownAccounts = new ArrayList<>();
+        comanagedAccounts = new ArrayList<>();
     }
 
     public String getCreditCardNum() {
@@ -57,6 +52,35 @@ public class Client implements Serializable {
 
     public void setInitialTransfer(double initialTransfer) {
         this.initialTransfer = initialTransfer;
+    }
+
+    @ManyToOne
+    public Advisor getAdvisor() {
+        return advisor;
+    }
+
+    public void setAdvisor(Advisor advisor) {
+        this.advisor = advisor;
+    }
+
+    @OneToMany(cascade = {CascadeType.ALL},
+        fetch = FetchType.EAGER,
+        mappedBy = "owner")
+    public Collection<Account> getOwnAccounts() {
+        return ownAccounts;
+    }
+
+    public void setOwnAccounts(Collection<Account> ownAccounts) {
+        this.ownAccounts = ownAccounts;
+    }
+
+    @ManyToMany(mappedBy = "comanagers")
+    public Collection<Account> getComanagedAccounts() {
+        return comanagedAccounts;
+    }
+
+    public void setComanagedAccounts(Collection<Account> comanagedAccount) {
+        this.comanagedAccounts = comanagedAccount;
     }
 
     @Override

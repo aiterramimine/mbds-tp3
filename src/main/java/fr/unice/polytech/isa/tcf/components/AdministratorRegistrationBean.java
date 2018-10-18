@@ -15,8 +15,7 @@ public class AdministratorRegistrationBean implements AdministratorRegistration 
 
     @Override
     public int register(String name, String address) {
-        Administrator admin = new Administrator();
-        admin.setName(name);
+        Administrator admin = new Administrator(name, address);
         admin.setAddress(address);
 
         manager.persist(admin);

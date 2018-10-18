@@ -15,9 +15,7 @@ public class AdvisorRegistrationBean implements AdvisorRegistration {
 
     @Override
     public int register(String name, String address) {
-        Advisor advisor = new Advisor();
-        advisor.setName(name);
-        advisor.setAddress(address);
+        Advisor advisor = new Advisor(name, address);
 
         manager.persist(advisor);
         manager.flush();

@@ -20,14 +20,13 @@ public class ClientRegistryBean implements ClientFinder, ClientRegistration {
     @PersistenceContext private EntityManager manager;
 
     @Override
-    public void register(String name, String creditCardNum, double initialTransfer) throws AlreadyExistingClientException {
+    public void register(String name, String address, String creditCardNum, double initialTransfer) throws AlreadyExistingClientException {
 
         if(findByName(name).isPresent()) {
             throw new AlreadyExistingClientException(name);
         }
 
-        Client c = new Client();
-        c.setName(name);
+        Client c = new Client(name, address);
         c.setCreditCardNum(creditCardNum);
         c.setInitialTransfer(initialTransfer);
 

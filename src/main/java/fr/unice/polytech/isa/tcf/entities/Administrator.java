@@ -6,4 +6,11 @@ import java.io.Serializable;
 @Entity
 public class Administrator extends Person implements Serializable {
 
+    public Administrator() {
+        super();
+    }
+
+    public Administrator(String name, String address) {
+        super(name, address);
+    }
 }
