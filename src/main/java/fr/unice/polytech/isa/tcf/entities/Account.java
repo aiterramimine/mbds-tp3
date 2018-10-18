@@ -14,12 +14,19 @@ import java.util.Collection;
 )
 public class Account implements Serializable {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @ManyToOne
     private Client owner;
 
     private double balance;
 
+    @ManyToMany(cascade = {CascadeType.ALL},
+            fetch = FetchType.EAGER)
+    @JoinTable(name = "client_account")
     private Collection<Client> comanagers;
 
 
@@ -33,8 +40,6 @@ public class Account implements Serializable {
         comanagers = new ArrayList<>();
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer getId() {
         return id;
     }
@@ -43,7 +48,6 @@ public class Account implements Serializable {
         this.id = compteBanquaireId;
     }
 
-    @ManyToOne
     public Client getOwner() {
         return owner;
     }
@@ -60,9 +64,6 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
-    @ManyToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.EAGER)
-    @JoinTable(name = "client_account")
     public Collection<Client> getComanagers() {
         return comanagers;
     }
