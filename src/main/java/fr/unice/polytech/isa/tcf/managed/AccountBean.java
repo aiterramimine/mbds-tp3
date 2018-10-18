@@ -1,5 +1,6 @@
 package fr.unice.polytech.isa.tcf.managed;
 
+import fr.unice.polytech.isa.tcf.ClientRegistration;
 import fr.unice.polytech.isa.tcf.IAccountFinder;
 import fr.unice.polytech.isa.tcf.IAccountRegistry;
 import fr.unice.polytech.isa.tcf.components.AccountOperationsBean;
@@ -24,6 +25,7 @@ public class AccountBean implements Serializable {
 
     @EJB private IAccountFinder finder;
     @EJB private IAccountRegistry registry;
+    @EJB private ClientRegistration clientRegistry;
 
     private static final Logger log = Logger.getLogger(AccountBean.class.getName());
 
@@ -34,6 +36,8 @@ public class AccountBean implements Serializable {
     private Integer creditCardNum;
 
     private String clientName;
+
+    private String clientAddress;
 
     public String select() {
         if(finder.findById(getId()).isPresent()) {
@@ -50,7 +54,7 @@ public class AccountBean implements Serializable {
     public String create() {
         System.out.println("Registering");
         try {
-            id = registry.register(getBalance(), getClientName());
+            id = registry.register(getBalance(), getClientName(), getClientAddress());
             return "manage?faces-redirect=true&includeViewParams=true";
         } catch (Exception e) {
             System.out.print("error creating account : ");
@@ -99,5 +103,13 @@ public class AccountBean implements Serializable {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public String getClientAddress() {
+        return clientAddress;
+    }
+
+    public void setClientAddress(String clientAddress) {
+        this.clientAddress = clientAddress;
     }
 }

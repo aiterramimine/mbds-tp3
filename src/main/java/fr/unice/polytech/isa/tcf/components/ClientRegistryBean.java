@@ -27,8 +27,6 @@ public class ClientRegistryBean implements ClientFinder, ClientRegistration {
         }
 
         Client c = new Client(name, address);
-        c.setCreditCardNum(creditCardNum);
-        c.setInitialTransfer(initialTransfer);
 
         manager.persist(c);
 

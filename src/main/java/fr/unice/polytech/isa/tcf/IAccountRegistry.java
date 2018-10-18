@@ -8,4 +8,5 @@ import java.util.List;
 @Local
 public interface IAccountRegistry {
     int register(double initialTransfer, String cilentName);
+    int register(double initialTransfer, String clientName, String clientAddress);
 }

@@ -35,9 +35,6 @@
             <h:form id="register-form">
                 <h:panelGrid columns="2">
 
-                    <h:outputText value='Nom du client :'/>
-                    <h:inputText value='#{accountBean.clientName}' required="true">
-                    </h:inputText>
 
                     <h:outputText value='Montant du dépot initial : €'/>
                     <h:inputText value='#{accountBean.balance}' required="true"
@@ -45,14 +42,19 @@
                         <f:validateLongRange minimum='#{accountBean.minTransfert}'/>
                     </h:inputText>
 
-
-                    <h:outputText value='Numero de carte de crédit :'/>
-                    <h:inputText value='#{accountBean.creditCardNum}' required="true">
+                    <h:outputText value='Nom de la personne :'/>
+                    <h:inputText value='#{accountBean.clientName}' required="true">
                     </h:inputText>
 
-                    <h:commandButton action="#{accountBean.create}" value="Register"/>
+                    <h:outputText value='Addresse : '/>
+                    <h:inputText value='#{accountBean.clientAddress}' required="true">
+                    </h:inputText>
 
                 </h:panelGrid>
+
+
+                <h:commandButton action="#{accountBean.create}" value="Register"/>
+
             </h:form>
         </f:view>
 

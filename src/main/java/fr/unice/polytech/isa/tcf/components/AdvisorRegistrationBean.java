@@ -22,4 +22,6 @@ public class AdvisorRegistrationBean implements AdvisorRegistration {
 
         return advisor.getId();
     }
+
+
 }

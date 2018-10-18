@@ -19,7 +19,7 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Client owner;
 
     private double balance;

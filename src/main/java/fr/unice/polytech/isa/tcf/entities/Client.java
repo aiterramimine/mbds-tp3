@@ -11,18 +11,18 @@ import java.util.Collection;
 @Entity
 public class Client extends Person implements Serializable {
 
-    @NotNull
-    @Pattern(regexp = "\\d{10}+", message = "Numéro de carte de crédit invalide")
-    private String creditCardNum;
 
-    @NotNull
-    @DecimalMin(value="50.00", message = "Vous devez transférer au minimum 50 euros à la création du compte")
-    private double initialTransfer;
+    private int id;
 
+    @ManyToOne
     private Advisor advisor;
 
+    @OneToMany(cascade = {CascadeType.ALL},
+            fetch = FetchType.EAGER,
+            mappedBy = "owner")
     private Collection<Account> ownAccounts;
 
+    @ManyToMany(mappedBy = "comanagers")
     private Collection<Account> comanagedAccounts;
 
 
@@ -38,23 +38,6 @@ public class Client extends Person implements Serializable {
         comanagedAccounts = new ArrayList<>();
     }
 
-    public String getCreditCardNum() {
-        return creditCardNum;
-    }
-
-    public void setCreditCardNum(String creditCard) {
-        this.creditCardNum = creditCard;
-    }
-
-    public double getInitialTransfer() {
-        return initialTransfer;
-    }
-
-    public void setInitialTransfer(double initialTransfer) {
-        this.initialTransfer = initialTransfer;
-    }
-
-    @ManyToOne
     public Advisor getAdvisor() {
         return advisor;
     }
@@ -63,9 +46,7 @@ public class Client extends Person implements Serializable {
         this.advisor = advisor;
     }
 
-    @OneToMany(cascade = {CascadeType.ALL},
-        fetch = FetchType.EAGER,
-        mappedBy = "owner")
+
     public Collection<Account> getOwnAccounts() {
         return ownAccounts;
     }
@@ -74,7 +55,6 @@ public class Client extends Person implements Serializable {
         this.ownAccounts = ownAccounts;
     }
 
-    @ManyToMany(mappedBy = "comanagers")
     public Collection<Account> getComanagedAccounts() {
         return comanagedAccounts;
     }
@@ -86,7 +66,7 @@ public class Client extends Person implements Serializable {
     @Override
     public int hashCode() {
         int result = getName() != null ? getName().hashCode() : 0;
-        result = 31 * result + (getCreditCardNum() != null ? getCreditCardNum().hashCode() : 0);
+        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
         return result;
     }
 
@@ -101,7 +81,7 @@ public class Client extends Person implements Serializable {
 
         if (getName() != null ? !getName().equals(customer.getName()) : customer.getName() != null)
             return false;
-        if (getCreditCardNum() != null ? !getCreditCardNum().equals(customer.getCreditCard()) : customer.getCreditCard() != null)
+        if (getAddress() != null ? !getAddress().equals(customer.getCreditCard()) : customer.getCreditCard() != null)
             return false;
         return true;
 
@@ -112,8 +92,8 @@ public class Client extends Person implements Serializable {
         return "Client {" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", creditCardNumber='" + creditCardNum + '\'' +
-                ", minimalTransfer='" + initialTransfer + '\'' +
+                ", address='" + getAddress() + '\'' +
+                ", address='" + getAddress() + '\'' +
                 '}';
     }
 }

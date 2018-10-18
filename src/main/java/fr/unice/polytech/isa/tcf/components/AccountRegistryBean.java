@@ -3,6 +3,7 @@ package fr.unice.polytech.isa.tcf.components;
 import fr.unice.polytech.isa.tcf.IAccountFinder;
 import fr.unice.polytech.isa.tcf.IAccountRegistry;
 import fr.unice.polytech.isa.tcf.entities.Account;
+import fr.unice.polytech.isa.tcf.entities.Client;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
@@ -56,6 +57,24 @@ public class AccountRegistryBean implements IAccountFinder, IAccountRegistry {
         TypedQuery<Account> query = em.createNamedQuery("findAllAccounts", Account.class);
 
         return query.getResultList();
+    }
+
+    @Override
+    public int register(double initialTransfer, String clientName, String clientAddress) {
+
+        Account a = new Account();
+        a.setBalance(initialTransfer);
+
+        Client c = new Client();
+        c.setName(clientName);
+        c.setAddress(clientAddress);
+
+        a.setOwner(c);
+
+        em.persist(a);
+        em.flush();
+
+        return a.getId();
     }
 
 
