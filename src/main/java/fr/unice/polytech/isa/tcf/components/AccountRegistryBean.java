@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Stateless
-public class AccountRegistryBean implements IAccountFinder, IAccountRegistry {
+public class AccountRegistryBean implements IAccountRegistry {
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
@@ -32,31 +32,6 @@ public class AccountRegistryBean implements IAccountFinder, IAccountRegistry {
         em.flush();
 
         return a.getId();
-    }
-
-    @Override
-    public Optional<Account> findById(int id) {
-        CriteriaBuilder builder = em.getCriteriaBuilder();
-        CriteriaQuery<Account> criteria = builder.createQuery(Account.class);
-        Root<Account> root = criteria.from(Account.class);
-        criteria.select(root).where(builder.equal(root.get("id"), id));
-
-        TypedQuery<Account> query = em.createQuery(criteria);
-
-        try {
-            return Optional.of(query.getSingleResult());
-        } catch(NoResultException nre) {
-            log.log(Level.FINEST, "No result for ["+id+"]", nre);
-            return Optional.empty();
-        }
-    }
-
-    @Override
-    public List<Account> findAll() {
-
-        TypedQuery<Account> query = em.createNamedQuery("findAllAccounts", Account.class);
-
-        return query.getResultList();
     }
 
     @Override

@@ -38,6 +38,7 @@ public class UserLoginBean {
     }
 
     public String login() {
+
         return "../accounts/index?faces-redirect=true&includeViewParams=true";
     }
 }

@@ -23,5 +23,13 @@ public class AdvisorRegistrationBean implements AdvisorRegistration {
         return advisor.getId();
     }
 
+    @Override
+    public Advisor registerWithReturn(String name, String address) {
+        Advisor advisor = new Advisor(name, address);
 
+        manager.persist(advisor);
+        manager.flush();
+
+        return advisor;
+    }
 }

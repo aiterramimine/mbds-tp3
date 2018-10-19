@@ -13,4 +13,19 @@ public class Administrator extends Person implements Serializable {
     public Administrator(String name, String address) {
         super(name, address);
     }
+
+    @Override
+    public boolean isClient() {
+        return false;
+    }
+
+    @Override
+    public boolean isAdvisor() {
+        return false;
+    }
+
+    @Override
+    public boolean isAdministrator() {
+        return true;
+    }
 }

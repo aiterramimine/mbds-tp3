@@ -1,6 +1,7 @@
 package fr.unice.polytech.isa.tcf.managed;
 
 import fr.unice.polytech.isa.tcf.IAccountFinder;
+import fr.unice.polytech.isa.tcf.PersonFinder;
 import fr.unice.polytech.isa.tcf.entities.Account;
 
 import javax.faces.bean.ManagedBean;
@@ -18,13 +19,29 @@ public class AccountCatalogBean implements Serializable {
     private List<Account> accounts;
 
     @EJB
-    private IAccountFinder finder;
+    private IAccountFinder accountFinder;
+
+    @EJB
+    private PersonFinder personFinder;
 
     @PostConstruct
     public void init() {
         accounts = new ArrayList<>();
 
-        accounts = finder.findAll();
+        //ToDo : remove next line after the session bean is fully implemented
+        accounts = accountFinder.findAll();
+
+
+        //ToDo : retrieve sessions info to call the right method
+//        String role = sessionBean.role;
+//        if (role.equals("Client")) {
+//            accounts = finder.findAllForUser(sessionBean.id);
+//        } else if (role.equals("Advisor")) {
+//            accounts = finder.findAllForAdvisor(sessionBean.id);
+//        } else {
+//            // ToDo: Redirect error (no right to access this page)
+//        }
+
     }
 
     public List<Account> getAccounts() {

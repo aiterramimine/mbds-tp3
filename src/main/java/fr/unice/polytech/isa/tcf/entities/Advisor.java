@@ -31,4 +31,23 @@ public class Advisor extends Person implements Serializable {
     public Advisor(String name, String address) {
         super(name, address);
     }
+
+    @Override
+    public boolean isClient() {
+        return false;
+    }
+
+    @Override
+    public boolean isAdvisor() {
+        return true;
+    }
+
+    @Override
+    public boolean isAdministrator() {
+        return false;
+    }
+
+    public void addClient(Client c) {
+        clients.add(c);
+    }
 }

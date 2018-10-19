@@ -50,4 +50,11 @@ public abstract class Person implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public abstract boolean isClient();
+
+    public abstract boolean isAdvisor();
+
+    public abstract boolean isAdministrator();
+
 }

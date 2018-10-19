@@ -7,13 +7,17 @@ import fr.unice.polytech.isa.tcf.entities.Client;
 import fr.unice.polytech.isa.tcf.entities.Customer;
 import fr.unice.polytech.isa.tcf.exceptions.AlreadyExistingClientException;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+@Stateless
 public class ClientRegistryBean implements ClientFinder, ClientRegistration {
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
@@ -34,10 +38,8 @@ public class ClientRegistryBean implements ClientFinder, ClientRegistration {
     }
 
     @Override
-    public int register(String name, String address, Advisor advisor) throws AlreadyExistingClientException {
-        if (findByName(name).isPresent()) {
-            throw new AlreadyExistingClientException(name);
-        }
+    public int register(String name, String address, Advisor advisor) {
+        System.out.println("REGISTER USER");
 
         Client c = new Client(name, address);
         c.setAdvisor(advisor);
@@ -49,11 +51,11 @@ public class ClientRegistryBean implements ClientFinder, ClientRegistration {
 
     @Override
     public Optional<Client> findByName(String name) {
-        CriteriaBuilder builder = manager.getCriteriaBuilder();
-        CriteriaQuery<Client> criteria = builder.createQuery(Client.class);
+        Query query = manager.createQuery("SELECT c FROM Client c WHERE c.name = :name");
+        query.setParameter("name", name);
 
-
-        return null;
+        List<Client> results = query.getResultList();
+        return Optional.ofNullable(results.get(0));
     }
 
 }

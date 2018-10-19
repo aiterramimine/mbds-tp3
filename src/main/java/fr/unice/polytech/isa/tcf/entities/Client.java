@@ -93,4 +93,19 @@ public class Client extends Person implements Serializable {
                 ", address='" + getAddress() + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean isClient() {
+        return true;
+    }
+
+    @Override
+    public boolean isAdvisor() {
+        return false;
+    }
+
+    @Override
+    public boolean isAdministrator() {
+        return false;
+    }
 }
