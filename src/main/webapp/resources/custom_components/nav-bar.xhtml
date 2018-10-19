@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<composite:interface>
+    <composite:attribute name = "userName"/>
+    <composite:attribute name = "applicationTitle"/>
+
+</composite:interface>
+
+<composite:implementation>
+
+    <b:navBar brand="#{cc.attrs.applicationTitle}" brandHref="#" id="dropMenuExample" inverse="true">
+        <b:navbarLinks>
+            <b:dropMenu value="#{cc.attrs.userName}">
+                <b:navLink value="Profil" href="#"></b:navLink>
+                <b:navLink value="Lougout" href="#"></b:navLink>
+            </b:dropMenu>
+            <b:navLink value="Comptes" href="#"></b:navLink>
+            <b:dropMenu value="Messages">
+                <b:navLink value="Reçus" href="#"></b:navLink>
+                <b:navLink value="Envoyés" href="#"></b:navLink>
+            </b:dropMenu>
+        </b:navbarLinks>
+    </b:navBar>
+
+</composite:implementation>
+
+</html>

@@ -11,9 +11,6 @@ import java.util.Collection;
 @Entity
 public class Client extends Person implements Serializable {
 
-
-    private int id;
-
     @ManyToOne
     private Advisor advisor;
 

@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:b="http://bootsfaces.net/ui"
+      xmlns:tp = "http://java.sun.com/jsf/composite/custom_components">
 
 
     <h:head>
@@ -15,48 +16,54 @@
 
     <h:body>
 
-        <h1> Gestion de comptes bancairesiiiiii </h1>
-
-        <h:messages id="form-error" style="color: red"/>
-
-        <h2>Séléctionnnez un compte bancaire existant</h2>
-        <f:view>
-            <h:form id="select-form">
-                <h:panelGrid columns="2">
-                    <h:outputText value='Account id:'/>
-                    <h:inputText value='#{accountBean.id}' required="true"/>
-                    <h:commandButton action="#{accountBean.select}" value="Select"/>
-                </h:panelGrid>
-            </h:form>
-        </f:view>
-
-        <h2>Créer un nouveau compte </h2>
-        <f:view>
-            <h:form id="register-form">
-                <h:panelGrid columns="2">
+        <tp:nav-bar
+                applicationTitle = "MBDS Banque"
+                userName = "Mock user"/>
 
 
-                    <h:outputText value='Montant du dépot initial : €'/>
-                    <h:inputText value='#{accountBean.balance}' required="true"
-                        validatorMessage="Vous devez déposer initialement un montant de #{accountBean.minTransfert}">
-                        <f:validateLongRange minimum='#{accountBean.minTransfert}'/>
-                    </h:inputText>
+        <h1> Création de compte </h1>
 
-                    <h:outputText value='Nom de la personne :'/>
-                    <h:inputText value='#{accountBean.clientName}' required="true">
-                    </h:inputText>
+        <b:form id="register-form" horizontal="true">
 
-                    <h:outputText value='Addresse : '/>
-                    <h:inputText value='#{accountBean.clientAddress}' required="true">
-                    </h:inputText>
+            <b:container fluid="true">
+                <b:row>
 
-                </h:panelGrid>
+                    <b:column span="3">
+                        <b:panel title="Nouveau compte" inverse="true" collapsible="false" look="primary">
+                            <b:row>
 
+                                <b:column span="4">
+                                    <h:outputText value="Depot initial:"/>
+                                </b:column>
 
-                <h:commandButton action="#{accountBean.create}" value="Register"/>
+                                <b:column span="8">
+                                    <b:inputText placeholder="50">
+                                        <f:facet name="prepend">
+                                            <h:outputText value="$"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                </b:column>
 
-            </h:form>
-        </f:view>
+                            </b:row>
+
+                            <b:row>
+                                <b:panel title="Nouveau compte" inverse="true">
+                                    ok
+                                </b:panel>
+                            </b:row>
+                        </b:panel>
+                        <b:commandButton action="#{accountBean.create}" value="Créer" look="primary"/>
+                    </b:column>
+
+                    <b:column span="3">
+                        <tp:user-creation
+                                title="Nouveau client" />
+                    </b:column>
+
+                </b:row>
+            </b:container>
+
+        </b:form>
 
         <h2>Afficher la liste des comptes </h2>
         <f:view>
@@ -67,6 +74,7 @@
             </h:form>
         </f:view>
 
+        <h:messages id="form-error" style="color: red"/>
     </h:body>
 
 

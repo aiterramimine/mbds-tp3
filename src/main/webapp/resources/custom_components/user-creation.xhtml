@@ -1,0 +1,34 @@
+<!-- Taglib for creating a user. -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<composite:interface>
+    <composite:attribute name = "title"/>
+
+</composite:interface>
+
+<composite:implementation>
+
+
+    <b:panel title="#{cc.attrs.title}" inverse="true" collapsible="false">
+
+        <b:inputText label-small-screen="4" small-screen="8"  label="Nom : ">
+        </b:inputText>
+
+        <b:inputText label-small-screen="4" small-screen="8"  label="Adresse : " style="margin-top: 20px;" labelStyle="margin-top: 20px;">
+        </b:inputText>
+
+    </b:panel>
+
+    <b:commandButton action="nothing" value="Créer"/>
+
+
+
+</composite:implementation>
+
+</html>

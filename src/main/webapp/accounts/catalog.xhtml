@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:tp = "http://java.sun.com/jsf/composite/custom_components">
 
 
 <h:head>
@@ -15,6 +15,10 @@
 </h:head>
 
 <h:body>
+
+    <tp:nav-bar
+            applicationTitle = "MBDS Banque"
+            userName = "Mock username"/>
 
     <h1> Liste de comptes de la banque </h1>
 
