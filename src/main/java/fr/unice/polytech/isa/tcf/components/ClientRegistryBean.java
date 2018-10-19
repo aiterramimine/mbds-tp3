@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -25,26 +26,15 @@ public class ClientRegistryBean implements ClientFinder, ClientRegistration {
     @PersistenceContext private EntityManager manager;
 
     @Override
-    public void register(String name, String address, String creditCardNum, double initialTransfer) throws AlreadyExistingClientException {
-
-        if(findByName(name).isPresent()) {
-            throw new AlreadyExistingClientException(name);
-        }
-
-        Client c = new Client(name, address);
-
-        manager.persist(c);
-
-    }
-
-    @Override
     public int register(String name, String address, Advisor advisor) {
         System.out.println("REGISTER USER");
 
         Client c = new Client(name, address);
-        c.setAdvisor(advisor);
+        advisor.addClient(c);
+//        c.setAdvisor(advisor);
 
         manager.persist(c);
+        manager.merge(advisor);
 
         return c.getId();
     }

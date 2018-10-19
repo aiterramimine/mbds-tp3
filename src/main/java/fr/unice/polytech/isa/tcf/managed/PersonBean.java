@@ -63,8 +63,6 @@ public class PersonBean implements Serializable {
                 int idAdvisor = Integer.parseInt(req.getParameter("idAdvisor"));
                 Advisor advisor = advisorFinder.findById(idAdvisor);
 
-                System.out.println("ADVISOR " + idAdvisor + " NULL ?? " + advisor == null);
-
                 idCreated = clientRegistration.register(name, address, advisor);
                 System.out.print("New client : " + idCreated + " | advisor : " + advisor.getName() + " | ");
 

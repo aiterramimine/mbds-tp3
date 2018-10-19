@@ -10,12 +10,10 @@ import java.util.Collection;
 
 @Entity
 public class Advisor extends Person implements Serializable {
-
+    @OneToMany(cascade = {CascadeType.ALL},
+            fetch = FetchType.EAGER)
     private Collection<Client> clients;
 
-    @OneToMany(cascade = {CascadeType.ALL},
-        fetch = FetchType.EAGER,
-        mappedBy = "advisor")
     public Collection<Client> getClients() {
         return clients;
     }
@@ -26,10 +24,12 @@ public class Advisor extends Person implements Serializable {
 
     public Advisor() {
         super();
+        clients = new ArrayList<>();
     }
 
     public Advisor(String name, String address) {
         super(name, address);
+        clients = new ArrayList<>();
     }
 
     @Override

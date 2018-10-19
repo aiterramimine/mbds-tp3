@@ -3,6 +3,7 @@ package fr.unice.polytech.isa.tcf.managed;
 import fr.unice.polytech.isa.tcf.AdministratorRegistration;
 import fr.unice.polytech.isa.tcf.AdvisorRegistration;
 import fr.unice.polytech.isa.tcf.ClientRegistration;
+import fr.unice.polytech.isa.tcf.IAccountRegistry;
 import fr.unice.polytech.isa.tcf.entities.Administrator;
 import fr.unice.polytech.isa.tcf.entities.Advisor;
 import fr.unice.polytech.isa.tcf.entities.Client;
@@ -25,6 +26,8 @@ public class ApplicationInitBean {
 
     @EJB
     private ClientRegistration clientRegistration;
+
+    @EJB private IAccountRegistry accountRegistry;
 
     @PostConstruct
     public void init() {

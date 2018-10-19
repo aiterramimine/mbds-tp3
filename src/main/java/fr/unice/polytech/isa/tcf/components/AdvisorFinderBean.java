@@ -26,7 +26,6 @@ public class AdvisorFinderBean implements AdvisorFinder {
         Query query = manager.createQuery("SELECT a FROM Advisor a WHERE a.id = :id");
         query.setParameter("id", id);
         List<Advisor> results = query.getResultList();
-        System.out.println( results.get(0).getName());
         return results.isEmpty() ? null : results.get(0);
     }
 }

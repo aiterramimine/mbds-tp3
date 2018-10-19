@@ -11,8 +11,8 @@ import java.util.Collection;
 @Entity
 public class Client extends Person implements Serializable {
 
-    @ManyToOne
-    private Advisor advisor;
+//    @ManyToOne
+//    private Advisor advisor;
 
     @OneToMany(cascade = {CascadeType.ALL},
             fetch = FetchType.EAGER,
@@ -24,9 +24,6 @@ public class Client extends Person implements Serializable {
 
 
     public Client() {
-        super();
-        ownAccounts = new ArrayList<>();
-        comanagedAccounts = new ArrayList<>();
     }
 
     public Client(String name, String address) {
@@ -35,13 +32,13 @@ public class Client extends Person implements Serializable {
         comanagedAccounts = new ArrayList<>();
     }
 
-    public Advisor getAdvisor() {
-        return advisor;
-    }
-
-    public void setAdvisor(Advisor advisor) {
-        this.advisor = advisor;
-    }
+//    public Advisor getAdvisor() {
+//        return advisor;
+//    }
+//
+//    public void setAdvisor(Advisor advisor) {
+//        this.advisor = advisor;
+//    }
 
 
     public Collection<Account> getOwnAccounts() {

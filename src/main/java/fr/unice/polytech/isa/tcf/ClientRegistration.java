@@ -8,7 +8,5 @@ import javax.ejb.Local;
 @Local
 public interface ClientRegistration {
 
-    void register(String name, String address, String creditCardNum, double initialTransfer) throws AlreadyExistingClientException;
-
     int register (String name, String address, Advisor advisor);
 }
