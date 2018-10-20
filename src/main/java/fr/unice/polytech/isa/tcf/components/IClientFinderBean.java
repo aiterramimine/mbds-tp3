@@ -1,6 +1,6 @@
 package fr.unice.polytech.isa.tcf.components;
 
-import fr.unice.polytech.isa.tcf.ClientFinder;
+import fr.unice.polytech.isa.tcf.IClientFinder;
 import fr.unice.polytech.isa.tcf.entities.Client;
 
 import javax.ejb.Stateless;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Stateless
-public class ClientFinderBean implements ClientFinder {
+public class IClientFinderBean implements IClientFinder {
 
     @PersistenceContext
     private EntityManager manager;

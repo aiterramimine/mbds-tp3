@@ -39,13 +39,6 @@
 
             </h:panelGrid>
 
-                <h:outputText value='Role : '/>
-                <select name="role" onchange="checkClient(this)">
-                    <option value="Client">Client</option>
-                    <option value="Advisor">Advisor</option>
-                    <option value="Administrator">Administrator</option>
-                </select>
-
             <b:selectOneMenu value="#{personBean.role}">
                 <f:selectItem itemValue="client" itemLabel="Client" />
                 <f:selectItem itemValue="advisor" itemLabel="Advisor" />
