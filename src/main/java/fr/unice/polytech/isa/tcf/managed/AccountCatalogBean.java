@@ -3,10 +3,12 @@ package fr.unice.polytech.isa.tcf.managed;
 import fr.unice.polytech.isa.tcf.IAccountFinder;
 import fr.unice.polytech.isa.tcf.PersonFinder;
 import fr.unice.polytech.isa.tcf.entities.Account;
+import fr.unice.polytech.isa.tcf.entities.Client;
 
 import javax.faces.bean.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,37 +19,29 @@ import java.util.List;
 public class AccountCatalogBean implements Serializable {
 
     private List<Account> accounts;
+    private List<Account> comanagedAccounts;
 
     @EJB
     private IAccountFinder accountFinder;
 
-
     @PostConstruct
     public void init() {
-        accounts = new ArrayList<>();
-
-        //ToDo : remove next line after the session bean is fully implemented
-        accounts = accountFinder.findAll();
-
-
-        //ToDo : retrieve sessions info to call the right method
-//        String role = sessionBean.role;
-//        if (role.equals("client")) {
-//            accounts = finder.findAllForUser(sessionBean.id);
-//        } else if (role.equals("Advisor")) {
-//            accounts = finder.findAllForAdvisor(sessionBean.id);
-//        } else {
-//            // ToDo: Redirect error (no right to access this page)
-//        }
-
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
+    public List<Account> getAccounts(int id) {
+        return accountFinder.findAllForUser(id);
     }
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
+    public List<Account> getAllAccounts() {
+        return accountFinder.findAll();
+    }
+
+    public List<Account> getAccountsForAdvisor(int id) {
+        return accountFinder.findAllForAdvisor(id);
+    }
+
+    public List<Account> getComanagedAccounts(int id) {
+        return accountFinder.findAllComanagedForUser(id);
     }
 
     public String getBalanceStyle(Double balance) {

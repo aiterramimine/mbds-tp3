@@ -33,9 +33,9 @@ public class PersonFinderBean implements PersonFinder {
     @Override
     public Person findByName(String name) throws PersonNotFoundException {
         Query query = manager.createQuery(
-                "SELECT p" +
-                        "FROM Person p " +
-                        "WHERE p.name = :name");
+                "SELECT p " +
+                    "FROM Person p " +
+                    "WHERE p.name = :name");
         query.setParameter("name", name);
         List<Person> results = query.getResultList();
         if (results.isEmpty()) {

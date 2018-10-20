@@ -14,6 +14,7 @@ public abstract class Person implements Serializable {
     protected int id;
 
     @NotNull
+    @Column(unique = true)
     protected String name;
 
     @NotNull

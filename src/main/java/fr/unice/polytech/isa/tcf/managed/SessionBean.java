@@ -5,8 +5,10 @@ import fr.unice.polytech.isa.tcf.entities.Person;
 import fr.unice.polytech.isa.tcf.exceptions.PersonNotFoundException;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import java.io.Serializable;
 
 @ManagedBean(name = "sessionBean")
@@ -14,6 +16,7 @@ import java.io.Serializable;
 public class SessionBean implements Serializable {
     private Person connectedUser;
     private String role;
+    private String name;
 
     @EJB
     private PersonFinder personFinder;
@@ -22,33 +25,31 @@ public class SessionBean implements Serializable {
         return connectedUser.getId();
     }
 
-    public String getRole() {
-        if (role.length() == 0) {
-            if (connectedUser.isAnAdministrator()) {
-                role = "Administrator";
-            } else if (connectedUser.isAnAdvisor()) {
-                role = "Advisor";
-            } else {
-                role = "client";
-            }
-        }
-        return role;
+    public String getName() {
+        return name;
     }
 
-    public void connectById(int id) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Person getConnectedUser() {
+        return connectedUser;
+    }
+
+    public String login() {
+        Person person = null;
         try {
-            Person person = personFinder.findById(id);
+            person = personFinder.findByName(this.name);
         } catch (PersonNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+            FacesContext.getCurrentInstance().addMessage("form-error", new FacesMessage("No user with this username"));
 
-    public void connectByName(String name) {
-        try {
-            Person person = personFinder.findByName(name);
-        } catch (PersonNotFoundException e) {
-            e.printStackTrace();
+            return "./login.jsf";
         }
 
+        connectedUser = person;
+        return "../accounts/index?faces-redirect=true&includeViewParams=true";
+
     }
+
 }
