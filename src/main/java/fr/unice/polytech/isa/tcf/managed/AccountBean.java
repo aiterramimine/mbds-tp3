@@ -6,6 +6,7 @@ import fr.unice.polytech.isa.tcf.IAccountRegistry;
 import fr.unice.polytech.isa.tcf.components.AccountOperationsBean;
 import fr.unice.polytech.isa.tcf.components.AccountRegistryBean;
 import fr.unice.polytech.isa.tcf.entities.Account;
+import fr.unice.polytech.isa.tcf.entities.Client;
 import fr.unice.polytech.isa.tcf.entities.Constants;
 
 import javax.ejb.EJB;
@@ -38,6 +39,8 @@ public class AccountBean implements Serializable {
     private String clientName;
 
     private String clientAddress;
+
+    private Client owner;
 
     public String select() {
         if(finder.findById(getId()).isPresent()) {
@@ -111,5 +114,13 @@ public class AccountBean implements Serializable {
 
     public void setClientAddress(String clientAddress) {
         this.clientAddress = clientAddress;
+    }
+
+    public Client getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Client owner) {
+        this.owner = owner;
     }
 }

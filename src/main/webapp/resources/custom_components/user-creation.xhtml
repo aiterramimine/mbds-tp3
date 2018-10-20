@@ -9,6 +9,8 @@
 
 <composite:interface>
     <composite:attribute name = "title"/>
+    <composite:attribute name = "userName" />
+    <composite:attribute name = "userAddress"/>
 
 </composite:interface>
 
@@ -17,10 +19,15 @@
 
     <b:panel title="#{cc.attrs.title}" inverse="true" collapsible="false">
 
-        <b:inputText label-small-screen="4" small-screen="8"  label="Nom : ">
+        <b:inputText label-small-screen="4" small-screen="8"
+                     label="Nom : "
+                     value="#{cc.attrs.userName}">
         </b:inputText>
 
-        <b:inputText label-small-screen="4" small-screen="8"  label="Adresse : " style="margin-top: 20px;" labelStyle="margin-top: 20px;">
+        <b:inputText label-small-screen="4" small-screen="8"
+                     label="Adresse : " style="margin-top: 20px;"
+                     labelStyle="margin-top: 20px;"
+                     value="#{cc.attrs.userName}">
         </b:inputText>
 
     </b:panel>
