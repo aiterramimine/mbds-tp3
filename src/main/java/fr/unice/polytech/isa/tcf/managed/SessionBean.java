@@ -17,7 +17,6 @@ public class SessionBean implements Serializable {
     private Person connectedUser;
     private String role;
     private String name;
-    private String error;
 
     @EJB
     private PersonFinder personFinder;
@@ -26,29 +25,12 @@ public class SessionBean implements Serializable {
         return connectedUser.getId();
     }
 
-    public String getRole() {
-        if (role.length() == 0) {
-            if (connectedUser.isAnAdministrator()) {
-                role = "Administrator";
-            } else if (connectedUser.isAnAdvisor()) {
-                role = "Advisor";
-            } else {
-                role = "Client";
-            }
-        }
-        return role;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getError() {
-        return error;
     }
 
     public Person getConnectedUser() {
