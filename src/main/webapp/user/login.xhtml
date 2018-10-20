@@ -18,19 +18,13 @@
 
     <h1 class="title-primary"> Gestion de comptes bancaires </h1>
 
-    <h:messages id="form-error" style="color: green"/>
-    <h:messages id="form-success" style="color: green" />
-
-    <h2>Veuillez vous identifier (Par défaut dirige à la page d'acceuil de gestion de comptes bancaires)</h2>
-
+    <h:messages id="form-error" style="color: red"/>
 
     <tp:login-component
             usernameLabel = "Nom d'utilisateur: "
-            usernameValue = "#{userLoginBean.username}"
-            passwordLabel = "Mot de passe: "
-            passwordValue = "#{userLoginBean.password}"
+            usernameValue = "#{sessionBean.name}"
             loginButtonLabel = "Connection"
-            loginButtonAction = "#{userLoginBean.login}" />
+            loginButtonAction = "#{sessionBean.login}" />
 
 </h:body>
 

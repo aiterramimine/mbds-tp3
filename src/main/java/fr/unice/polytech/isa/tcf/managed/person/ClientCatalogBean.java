@@ -30,7 +30,7 @@ public class ClientCatalogBean {
     }
 
     public List<Client> getClients() {
-        return clients;
+        return clientFinder.findAll();
     }
 
 

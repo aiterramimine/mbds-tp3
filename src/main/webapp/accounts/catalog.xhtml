@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:tp = "http://java.sun.com/jsf/composite/custom_components">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:tp="http://java.sun.com/jsf/composite/custom_components"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 
 <h:head>
@@ -31,7 +32,7 @@
              showDetail="true"
              severity="info,warn"/>
 
-    <h2>Séléctionnnez un compte bancaire existant</h2>
+    <h2>Mes comptes</h2>
 
     <h:form>
             <b:message />
@@ -58,7 +59,34 @@
 
     </h:form>
 
+    <c:if test="#{sessionBean.connectedUser.isAClient()}">
 
+    </c:if>
+    <h2>Les comptes que je gère</h2>
+    <h:form>
+            <b:message />
+
+        <b:dataTable value="#{accountCatalogBean.comanagedAccounts}"
+                     var="account"
+                     class="editableAccountTable"
+                     csv="true">
+
+            <b:dataTableColumn value="#{account.id}"/>
+            <b:dataTableColumn value="#{account.owner.name}" />
+            <b:dataTableColumn>
+                <f:facet name="header">
+                    <h:outputText value="Solde (€)" />
+                </f:facet>
+                <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
+            </b:dataTableColumn>
+            <b:dataTableColumn label="Actions">
+                <b:commandButton value="Gérer" icon="edit">
+                </b:commandButton>
+            </b:dataTableColumn>
+        </b:dataTable>
+        <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
+
+    </h:form>
 
 
 </h:body>
