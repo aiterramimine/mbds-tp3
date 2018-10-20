@@ -8,6 +8,6 @@ public interface AdvisorFinder {
 
     List<Advisor> findAll();
 
-    Advisor findById(int id);
+    Advisor findById(Integer id);
 
 }

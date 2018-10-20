@@ -46,12 +46,21 @@
                     <option value="Administrator">Administrator</option>
                 </select>
 
+            <b:selectOneMenu value="#{personBean.role}">
+                <f:selectItem itemValue="client" itemLabel="Client" />
+                <f:selectItem itemValue="advisor" itemLabel="Advisor" />
+                <f:selectItem itemValue="administrator" itemLabel="Administrator" />
+
+            </b:selectOneMenu>
+
             <h:outputText value='Advisor : ' id="advisorLabel"/>
-            <select name="idAdvisor" id="DDadvisor">
+
+            <b:selectOneMenu converter="javax.faces.Integer" name="idAdvisor" id="DDadvisor" value="#{personBean.selectedAdvisorId}">
                 <c:forEach var="adv" items="#{personBean.getAllAdvisors()}">
-                    <option value="#{adv.id}">#{adv.name}</option>
+                    <f:selectItem itemValue="#{adv.id}" itemLabel="#{adv.name}"/>
                 </c:forEach>
-            </select>
+
+            </b:selectOneMenu>
 
             <h:commandButton action="#{personBean.create()}" value="Register"/>
 

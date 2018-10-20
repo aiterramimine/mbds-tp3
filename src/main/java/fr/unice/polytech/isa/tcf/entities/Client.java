@@ -83,7 +83,7 @@ public class Client extends Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Client {" +
+        return "client {" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + getAddress() + '\'' +
@@ -92,17 +92,17 @@ public class Client extends Person implements Serializable {
     }
 
     @Override
-    public boolean isClient() {
+    public boolean isAClient() {
         return true;
     }
 
     @Override
-    public boolean isAdvisor() {
+    public boolean isAnAdvisor() {
         return false;
     }
 
     @Override
-    public boolean isAdministrator() {
+    public boolean isAnAdministrator() {
         return false;
     }
 }

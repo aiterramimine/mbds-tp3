@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Local
-public interface ClientFinder {
+public interface IClientFinder {
 
     Optional<Client> findByName(String name);
 

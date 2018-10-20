@@ -21,8 +21,6 @@ public class AccountCatalogBean implements Serializable {
     @EJB
     private IAccountFinder accountFinder;
 
-    @EJB
-    private PersonFinder personFinder;
 
     @PostConstruct
     public void init() {
@@ -34,7 +32,7 @@ public class AccountCatalogBean implements Serializable {
 
         //ToDo : retrieve sessions info to call the right method
 //        String role = sessionBean.role;
-//        if (role.equals("Client")) {
+//        if (role.equals("client")) {
 //            accounts = finder.findAllForUser(sessionBean.id);
 //        } else if (role.equals("Advisor")) {
 //            accounts = finder.findAllForAdvisor(sessionBean.id);

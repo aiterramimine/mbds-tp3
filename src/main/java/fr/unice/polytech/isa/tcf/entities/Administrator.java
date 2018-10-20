@@ -15,17 +15,17 @@ public class Administrator extends Person implements Serializable {
     }
 
     @Override
-    public boolean isClient() {
+    public boolean isAClient() {
         return false;
     }
 
     @Override
-    public boolean isAdvisor() {
+    public boolean isAnAdvisor() {
         return false;
     }
 
     @Override
-    public boolean isAdministrator() {
+    public boolean isAnAdministrator() {
         return true;
     }
 }

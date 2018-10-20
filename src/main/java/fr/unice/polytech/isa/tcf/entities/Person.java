@@ -51,10 +51,10 @@ public abstract class Person implements Serializable {
         this.address = address;
     }
 
-    public abstract boolean isClient();
+    public abstract boolean isAClient();
 
-    public abstract boolean isAdvisor();
+    public abstract boolean isAnAdvisor();
 
-    public abstract boolean isAdministrator();
+    public abstract boolean isAnAdministrator();
 
 }

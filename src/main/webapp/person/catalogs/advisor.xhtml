@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:tp = "http://java.sun.com/jsf/composite/custom_components">
+
+
+<h:head>
+
+    <h:outputStylesheet library="css" name="bankApp.css" />
+    <title> Liste des comptes ouverts dans la banque </title>
+
+</h:head>
+
+<h:body>
+
+    <tp:nav-bar
+            applicationTitle = "MBDS Banque"
+            userName = "Mock username"/>
+
+    <h1> Liste de comptes de la banque </h1>
+
+    <!--<b:messages id="form-error" severity="error,fatal"/>-->
+
+    <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
+
+    <b:growl id="form-error"
+             globalOnly="true"
+             showDetail="true"
+             severity="info,warn"/>
+
+    <h2>Séléctionnnez un compte bancaire existant</h2>
+
+    <h:form>
+            <b:message />
+
+        <b:dataTable value="#{advisorCatalogBean.advisors}"
+                     var="advisor"
+                     class="editableAccountTable"
+                     csv="true">
+
+            <b:dataTableColumn value="#{advisor.id}"/>
+            <b:dataTableColumn value="#{advisor.name}" />
+            <b:dataTableColumn label="Number clients" value="#{advisor.numClients}" />
+
+            <b:dataTableColumn label="Actions">
+                <b:commandButton value="Modifier" icon="edit">
+                </b:commandButton>
+            </b:dataTableColumn>
+        </b:dataTable>
+        <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
+
+    </h:form>
+
+
+
+
+</h:body>
+
+
+</html>

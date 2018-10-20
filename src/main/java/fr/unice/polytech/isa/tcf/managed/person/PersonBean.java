@@ -1,15 +1,17 @@
-package fr.unice.polytech.isa.tcf.managed;
+package fr.unice.polytech.isa.tcf.managed.person;
 
 import fr.unice.polytech.isa.tcf.AdministratorRegistration;
 import fr.unice.polytech.isa.tcf.AdvisorFinder;
 import fr.unice.polytech.isa.tcf.AdvisorRegistration;
 import fr.unice.polytech.isa.tcf.ClientRegistration;
 import fr.unice.polytech.isa.tcf.entities.Advisor;
+import fr.unice.polytech.isa.tcf.managed.AccountBean;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.List;
@@ -35,6 +37,10 @@ public class PersonBean implements Serializable {
 
     private String address;
 
+    private String role;
+
+    private String selectedAdvisorId;
+
 //    public String select() {
 //        if(finder.findById(getId()).isPresent()) {
 //            Account a = finder.findById(getId()).get();
@@ -59,9 +65,9 @@ public class PersonBean implements Serializable {
             System.out.println("Trying to create " + role + " with name " + name + " and ADDRESS : " + address);
 
 
-            if (role.equals("Client")) {
-                int idAdvisor = Integer.parseInt(req.getParameter("idAdvisor"));
-                Advisor advisor = advisorFinder.findById(idAdvisor);
+            if (this.role.equals("client")) {
+                //int idAdvisor = Integer.parseInt(req.getParameter("idAdvisor"));
+                Advisor advisor = advisorFinder.findById(Integer.parseInt(selectedAdvisorId));
 
                 idCreated = clientRegistration.register(name, address, advisor);
                 System.out.print("New client : " + idCreated + " | advisor : " + advisor.getName() + " | ");
@@ -87,6 +93,11 @@ public class PersonBean implements Serializable {
     public String search() {
         System.out.println("Clicked on the button");
         return "catalog?faces-redirect=true&includeViewParams=true";
+    }
+
+    public void roleChanged(ValueChangeEvent event) {
+        System.out.println(event.getNewValue().toString());
+        this.role = event.getNewValue().toString();
     }
 
     public List<Advisor> getAllAdvisors() {
@@ -117,4 +128,19 @@ public class PersonBean implements Serializable {
         this.address = address;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setSelectedAdvisorId(String advisorId) {
+        selectedAdvisorId = advisorId;
+    }
+
+    public String getSelectedAdvisorId() {
+        return selectedAdvisorId;
+    }
 }

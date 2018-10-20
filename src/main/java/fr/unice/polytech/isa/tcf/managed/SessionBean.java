@@ -24,12 +24,12 @@ public class SessionBean implements Serializable {
 
     public String getRole() {
         if (role.length() == 0) {
-            if (connectedUser.isAdministrator()) {
+            if (connectedUser.isAnAdministrator()) {
                 role = "Administrator";
-            } else if (connectedUser.isAdvisor()) {
+            } else if (connectedUser.isAnAdvisor()) {
                 role = "Advisor";
             } else {
-                role = "Client";
+                role = "client";
             }
         }
         return role;

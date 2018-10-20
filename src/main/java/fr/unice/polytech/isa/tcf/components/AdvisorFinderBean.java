@@ -22,7 +22,7 @@ public class AdvisorFinderBean implements AdvisorFinder {
     }
 
     @Override
-    public Advisor findById(int id) {
+    public Advisor findById(Integer id) {
         Query query = manager.createQuery("SELECT a FROM Advisor a WHERE a.id = :id");
         query.setParameter("id", id);
         List<Advisor> results = query.getResultList();
