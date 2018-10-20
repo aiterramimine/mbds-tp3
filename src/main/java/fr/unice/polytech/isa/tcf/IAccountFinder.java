@@ -15,5 +15,7 @@ public interface IAccountFinder {
 
     List<Account> findAllForUser(int id);
 
+    List<Account> findAllComanagedForUser(int id);
+
     List<Account> findAllForAdvisor(int id);
 }

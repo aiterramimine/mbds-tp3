@@ -60,6 +60,18 @@ public class AccountFinderBean implements IAccountFinder {
     }
 
     @Override
+    public List<Account> findAllComanagedForUser(int id) {
+        Query query = em.createQuery(
+                 "SELECT a " +
+                    "FROM Account a, Client c" +
+                    "WHERE c.id = :id " +
+                    "AND c MEMBER OF c.comanagers"
+        );
+        query.setParameter("id", id);
+        return query.getResultList();
+    }
+
+    @Override
     public List<Account> findAllForAdvisor(int id) {
         Query query = em.createQuery(
                 "SELECT a " +

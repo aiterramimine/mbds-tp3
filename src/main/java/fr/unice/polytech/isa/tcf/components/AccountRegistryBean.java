@@ -52,5 +52,18 @@ public class AccountRegistryBean implements IAccountRegistry {
         return a.getId();
     }
 
+    @Override
+    public int register(double initialTransfer, Client client) {
+        Account a = new Account();
+        a.setBalance(initialTransfer);
+        a.setOwner(client);
 
+        // ToDo : Fix :o)
+
+        em.persist(client);
+        //em.persist(a);
+        em.flush();
+
+        return a.getId();
+    }
 }

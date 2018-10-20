@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Stateless
-public class ClientRegistryBean implements ClientFinder, ClientRegistration {
+public class ClientRegistryBean implements ClientRegistration {
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
@@ -36,16 +36,25 @@ public class ClientRegistryBean implements ClientFinder, ClientRegistration {
         manager.persist(c);
         manager.merge(advisor);
 
+        manager.flush();
+
         return c.getId();
     }
 
     @Override
-    public Optional<Client> findByName(String name) {
-        Query query = manager.createQuery("SELECT c FROM Client c WHERE c.name = :name");
-        query.setParameter("name", name);
+    public Client registerWithReturn(String name, String address, Advisor advisor) {
+        System.out.println("REGISTER USER");
 
-        List<Client> results = query.getResultList();
-        return Optional.ofNullable(results.get(0));
+        Client c = new Client(name, address);
+        advisor.addClient(c);
+//        c.setAdvisor(advisor);
+
+        manager.persist(c);
+        manager.merge(advisor);
+
+        manager.flush();
+
+        return c;
     }
 
 }
