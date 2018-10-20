@@ -2,6 +2,8 @@ package fr.unice.polytech.isa.tcf.components;
 
 import fr.unice.polytech.isa.tcf.*;
 import fr.unice.polytech.isa.tcf.entities.Account;
+import fr.unice.polytech.isa.tcf.entities.Operation;
+import fr.unice.polytech.isa.tcf.entities.OperationType;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -28,6 +30,9 @@ public class AccountOperationsBean implements IAccountCreditor, IAccountDebitor 
         if (optionalAccount.isPresent()) {
             Account account = optionalAccount.get();
             account.setBalance(account.getBalance() + amount);
+            Operation operation = new Operation(account, OperationType.CREDIT, amount);
+            account.addOperation(operation);
+            entityManager.merge(account);
         }
     }
 
@@ -37,6 +42,9 @@ public class AccountOperationsBean implements IAccountCreditor, IAccountDebitor 
         if (optionalAccount.isPresent()) {
             Account account = optionalAccount.get();
             account.setBalance(account.getBalance() - amount);
+            Operation operation = new Operation(account, OperationType.DEBIT, amount);
+            account.addOperation(operation);
+            entityManager.merge(account);
         }
     }
 

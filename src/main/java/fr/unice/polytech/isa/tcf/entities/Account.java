@@ -29,9 +29,15 @@ public class Account implements Serializable {
     @JoinTable(name = "client_account")
     private Collection<Client> comanagers;
 
+    @OneToMany(cascade = {CascadeType.ALL},
+            fetch = FetchType.EAGER,
+            mappedBy = "account")
+    private Collection<Operation> operations;
+
 
     public Account() {
         comanagers = new ArrayList<>();
+        operations = new ArrayList<>();
     }
 
     public Account(Client owner, Integer balance) {
@@ -74,6 +80,10 @@ public class Account implements Serializable {
 
     public void addComanagers(Client comanager) {
         comanagers.add(comanager);
+    }
+
+    public void addOperation(Operation operation){
+        operations.add(operation);
     }
 }
 
