@@ -57,6 +57,10 @@ public class Client extends Person implements Serializable {
         this.comanagedAccounts = comanagedAccount;
     }
 
+    public void addOwnAccount(Account a) {
+        this.ownAccounts.add(a);
+    }
+
     @Override
     public int hashCode() {
         int result = getName() != null ? getName().hashCode() : 0;

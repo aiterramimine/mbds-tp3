@@ -58,6 +58,7 @@ public class AccountRegistryBean implements IAccountRegistry {
         a.setBalance(initialTransfer);
         a.setOwner(client);
 
+
         em.persist(a);
         //em.persist(a);
         em.flush();
