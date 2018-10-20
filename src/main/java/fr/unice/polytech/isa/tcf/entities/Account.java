@@ -74,6 +74,14 @@ public class Account implements Serializable {
         return comanagers;
     }
 
+    public Collection<Operation> getOperations() {
+        return operations;
+    }
+
+    public void setOperations(Collection<Operation> operations) {
+        this.operations = operations;
+    }
+
     public void setComanagers(Collection<Client> comanagers) {
         this.comanagers = comanagers;
     }
