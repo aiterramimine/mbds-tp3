@@ -9,6 +9,7 @@ import fr.unice.polytech.isa.tcf.entities.Account;
 import fr.unice.polytech.isa.tcf.entities.Client;
 import fr.unice.polytech.isa.tcf.entities.Constants;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
@@ -21,7 +22,7 @@ import java.io.Serializable;
 import java.util.logging.Logger;
 
 @ManagedBean(name="accountBean")
-@RequestScoped
+@ViewScoped
 public class AccountBean implements Serializable {
 
     @EJB private IAccountFinder finder;
@@ -42,16 +43,15 @@ public class AccountBean implements Serializable {
 
     private Client owner;
 
-    public String select() {
-        if(finder.findById(getId()).isPresent()) {
-            Account a = finder.findById(getId()).get();
-            balance = a.getBalance();
-            return "manage?faces-redirect=true&includeViewParams=true";
-        } else {
-            FacesContext.getCurrentInstance()
-                    .addMessage("form-error", new FacesMessage("Aucun compte avec l'identifiant : " + getId()));
-            return Signal.UNKOWN;
-        }
+    private Boolean hideOwnerCreation;
+
+    private Boolean hasOwner;
+
+    @PostConstruct
+    public void init() {
+        owner = new Client();
+        hideOwnerCreation = true;
+        hasOwner = false;
     }
 
     public String create() {
@@ -66,10 +66,24 @@ public class AccountBean implements Serializable {
         }
     }
 
+    public void updateOwner() {
+        System.out.println(owner.getName());
+        hideOwnerCreation = true;
+        hasOwner = true;
+    }
 
     public String search() {
         System.out.println("Clicked on the button");
         return "catalog?faces-redirect=true&includeViewParams=true";
+    }
+
+    public void createOwner() {
+        hideOwnerCreation = false;
+        //hasOwner = true;
+    }
+
+    public void setCoOwner() {
+        System.out.println("Setting coowner");
     }
 
     public String getClientName() {
@@ -122,5 +136,21 @@ public class AccountBean implements Serializable {
 
     public void setOwner(Client owner) {
         this.owner = owner;
+    }
+
+    public Boolean getHideOwnerCreation() {
+        return hideOwnerCreation;
+    }
+
+    public void setHideOwnerCreation(Boolean hideOwnerCreation) {
+        this.hideOwnerCreation = hideOwnerCreation;
+    }
+
+    public Boolean getHasOwner() {
+        return hasOwner;
+    }
+
+    public void setHasOwner(Boolean hasOwner) {
+        this.hasOwner = hasOwner;
     }
 }

@@ -11,30 +11,34 @@
     <composite:attribute name = "title"/>
     <composite:attribute name = "userName" />
     <composite:attribute name = "userAddress"/>
+    <composite:attribute name = "user"/>
+    <composite:attribute name = "updatingUserAction"/>
+    <composite:attribute name = "hidden"/>
+
 
 </composite:interface>
 
 <composite:implementation>
 
+    <div style="display:#{cc.attrs.hidden ? 'none' : 'block'}">
+        <b:panel title="#{cc.attrs.title}" inverse="true" collapsible="false">
 
-    <b:panel title="#{cc.attrs.title}" inverse="true" collapsible="false">
+            <b:inputText label-small-screen="4" small-screen="8"
+                         label="Nom : "
+                         value="#{cc.attrs.user.name}">
+            </b:inputText>
 
-        <b:inputText label-small-screen="4" small-screen="8"
-                     label="Nom : "
-                     value="#{cc.attrs.userName}">
-        </b:inputText>
+            <b:inputText label-small-screen="4" small-screen="8"
+                         label="Adresse : " style="margin-top: 20px;"
+                         labelStyle="margin-top: 20px;"
+                         value="#{cc.attrs.user.address}">
+            </b:inputText>
 
-        <b:inputText label-small-screen="4" small-screen="8"
-                     label="Adresse : " style="margin-top: 20px;"
-                     labelStyle="margin-top: 20px;"
-                     value="#{cc.attrs.userName}">
-        </b:inputText>
+        </b:panel>
 
-    </b:panel>
+        <b:commandButton action="#{cc.attrs.updatingUserAction}" value="Créer"/>
 
-    <b:commandButton action="nothing" value="Créer"/>
-
-
+    </div>
 
 </composite:implementation>
 
