@@ -46,8 +46,8 @@ public class ClientRegistryBean implements ClientRegistration {
         System.out.println("REGISTER USER");
 
         Client c = new Client(name, address);
+        c.setAdvisor(advisor);
         advisor.addClient(c);
-//        c.setAdvisor(advisor);
 
         manager.persist(c);
         manager.merge(advisor);

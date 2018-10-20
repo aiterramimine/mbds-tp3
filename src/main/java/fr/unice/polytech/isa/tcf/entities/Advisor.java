@@ -11,7 +11,8 @@ import java.util.Collection;
 @Entity
 public class Advisor extends Person implements Serializable {
     @OneToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.EAGER)
+            fetch = FetchType.EAGER,
+            mappedBy = "advisor")
     private Collection<Client> clients;
 
     public Collection<Client> getClients() {
