@@ -62,7 +62,7 @@ public class PersonBean implements Serializable {
 
             int idCreated;
 
-            System.out.println("Trying to create " + role + " with name " + name + " and ADDRESS : " + address);
+            System.out.println("Trying to create " + this.role + " with name " + name + " and ADDRESS : " + address);
 
 
             if (this.role.equals("client")) {
@@ -72,12 +72,12 @@ public class PersonBean implements Serializable {
                 idCreated = clientRegistration.register(name, address, advisor);
                 System.out.print("New client : " + idCreated + " | advisor : " + advisor.getName() + " | ");
 
-            } else if (role.equals("Administrator")) {
-                idCreated = administratorRegistration.register(getName(), getAddress());
-                System.out.print("New administrator : " + idCreated + " | ");
-            } else {
+            } else if (this.role.equals("advisor")) {
                 idCreated = advisorRegistration.register(getName(), getAddress());
                 System.out.print("New advisor : " + idCreated + " | ");
+            } else {
+                idCreated = administratorRegistration.register(getName(), getAddress());
+                System.out.print("New administrator : " + idCreated + " | ");
             }
 
             System.out.println("name : " + getName() + " | address : " + getAddress());
