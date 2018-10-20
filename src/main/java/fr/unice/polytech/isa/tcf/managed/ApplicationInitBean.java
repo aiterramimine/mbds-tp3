@@ -1,6 +1,7 @@
 package fr.unice.polytech.isa.tcf.managed;
 
 import fr.unice.polytech.isa.tcf.*;
+import fr.unice.polytech.isa.tcf.entities.Account;
 import fr.unice.polytech.isa.tcf.entities.Administrator;
 import fr.unice.polytech.isa.tcf.entities.Advisor;
 import fr.unice.polytech.isa.tcf.entities.Client;
@@ -30,11 +31,15 @@ public class ApplicationInitBean {
 
     @EJB private IAccountRegistry accountRegistry;
 
+
     @PostConstruct
     public void init() {
         administratorRegistration.register("admin", "Antibes");
         Advisor advisor = advisorRegistration.registerWithReturn("advisor", "Nice");
-        Client client = clientRegistration.registerWithReturn("client", "Sophia-Antipolis", advisor);
+
+
+        accountRegistry.register(75, "Amine", "Nice");
+
         //accountRegistry.register(500, client);
 
     }
