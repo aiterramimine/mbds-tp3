@@ -53,9 +53,9 @@ public class SessionBean implements Serializable {
 
     }
 
-    /*public String logout() {
+    public String logout() {
 //        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        connectedUser = null;
+        /*connectedUser = null;
         role = null;
         name = null;
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -63,7 +63,8 @@ public class SessionBean implements Serializable {
         String uri = req.getRequestURI();
         String ctx = req.getContextPath();
         String base = url.substring(0, url.length() - uri.length() + ctx.length()) + "/";
-        return base +"user/login.jsf";
-    }*/
+        return base +"user/login.jsf";*/
+        return null;
+    }
 
 }
