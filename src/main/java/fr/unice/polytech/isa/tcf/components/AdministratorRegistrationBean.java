@@ -18,10 +18,13 @@ public class AdministratorRegistrationBean implements AdministratorRegistration 
     @Override
     public int register(String name, String town, String address, int zipcode) {
         Address ad = new Address(town, address, zipcode);
+
+        Administrator admin = new Administrator();
+        admin.setName(name);
+        admin.setAddress(ad);
+        ad.setPerson(admin);
+
         manager.persist(ad);
-
-        Administrator admin = new Administrator(name, ad);
-
         manager.persist(admin);
         manager.flush();
 

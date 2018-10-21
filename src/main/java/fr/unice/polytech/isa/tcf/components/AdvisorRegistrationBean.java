@@ -18,13 +18,13 @@ public class AdvisorRegistrationBean implements AdvisorRegistration {
     @Override
     public int register(String name, String town, String street, int zipcode) {
         Address ad = new Address(town, street, zipcode);
+
+        Advisor advisor = new Advisor();
+        advisor.setName(name);
+        advisor.setAddress(ad);
+        ad.setPerson(advisor);
+
         manager.persist(ad);
-
-        Advisor advisor = new Advisor(name, ad);
-
-        System.out.println("ADVISOR ADDRESS :::::");
-        System.out.println(advisor.getAddress().getAddress());
-
         manager.persist(advisor);
         manager.flush();
 
@@ -34,9 +34,10 @@ public class AdvisorRegistrationBean implements AdvisorRegistration {
     @Override
     public Advisor registerWithReturn(String name, String town, String address, int zipcode) {
         Address ad = new Address(town, address, zipcode);
-        manager.persist(ad);
-
-        Advisor advisor = new Advisor(name, ad);
+        Advisor advisor = new Advisor();
+        advisor.setName(name);
+        advisor.setAddress(ad);
+        ad.setPerson(advisor);
 
         manager.persist(advisor);
         manager.flush();

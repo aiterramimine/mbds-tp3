@@ -5,6 +5,7 @@ import fr.unice.polytech.isa.tcf.IAccountRegistry;
 import fr.unice.polytech.isa.tcf.entities.Account;
 import fr.unice.polytech.isa.tcf.entities.Address;
 import fr.unice.polytech.isa.tcf.entities.Client;
+import org.opensaml.saml.saml1.profile.impl.AddResponseShell;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
@@ -42,11 +43,13 @@ public class AccountRegistryBean implements IAccountRegistry {
         a.setBalance(initialTransfer);
 
         Client c = new Client();
+        Address ad = new Address(clientTown, clientAddress, clientZipcode);
         c.setName(clientName);
-        c.setAddress(new Address(clientTown, clientAddress, clientZipcode));
+        ad.setPerson(c);
 
         a.setOwner(c);
 
+        em.persist(ad);
         em.persist(a);
         em.flush();
 

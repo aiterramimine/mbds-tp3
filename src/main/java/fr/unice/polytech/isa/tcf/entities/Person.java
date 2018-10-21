@@ -1,5 +1,6 @@
 package fr.unice.polytech.isa.tcf.entities;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -17,8 +18,9 @@ public abstract class Person implements Serializable {
     @Column(unique = true)
     protected String name;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @MapsId
+    @OneToOne(cascade = {CascadeType.ALL},
+            fetch = FetchType.EAGER,
+            mappedBy = "person")
     protected Address address;
 
     public Person() {

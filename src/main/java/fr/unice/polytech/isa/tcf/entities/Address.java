@@ -20,6 +20,9 @@ public class Address {
     @Column(length = 5)
     private int zipcode;
 
+    @OneToOne
+    private Person person;
+
     public Address() {
 
     }
@@ -62,5 +65,12 @@ public class Address {
         this.zipcode = zipcode;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 }
 

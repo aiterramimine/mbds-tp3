@@ -22,16 +22,19 @@ public class ClientRegistryBean implements ClientRegistration {
         System.out.println("REGISTER USER");
 
         Address ad = new Address(town, address, zipcode);
-        manager.persist(ad);
 
-        Client c = new Client(name, ad);
+        Client c = new Client();
+        c.setName(name);
+        c.setAddress(ad);
+        ad.setPerson(c);
 
         c.setAdvisor(advisor);
-
         advisor.addClient(c);
+
         //manager.persist(c);
 
         //advisor.addClient(c);
+        manager.persist(ad);
         manager.merge(advisor);
 
         //System.out.println(a.getNumClients());
@@ -45,7 +48,10 @@ public class ClientRegistryBean implements ClientRegistration {
     public Client registerWithReturn(String name, String town, String address, int zipcode, Advisor advisor) {
         System.out.println("REGISTER USER");
 
-        Client c = new Client(name, new Address(town, address, zipcode));
+        Client c = new Client();
+        c.setName(name);
+        c.setAddress(new Address(town, address, zipcode));
+
         c.setAdvisor(advisor);
         advisor.addClient(c);
 
