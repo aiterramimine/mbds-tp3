@@ -44,7 +44,7 @@
             <b:dataTableColumn value="#{client.name}" />
             <b:dataTableColumn label="advisor" value="#{client.advisor.name}" />
             <b:dataTableColumn label="Nb comptes" value="#{client.ownAccounts.size()}" />
-            <b:dataTableColumn label="Adresse" value="#{client.getAddress().getZipcode()}"/>
+            <b:dataTableColumn label="Adresse" value="#{client.address.address}"/>
 
             <b:dataTableColumn label="Actions">
                 <c:if test="#{sessionBean.connectedUser.isAnAdministrator() || sessionBean.connectedUser.id == client.id}">
