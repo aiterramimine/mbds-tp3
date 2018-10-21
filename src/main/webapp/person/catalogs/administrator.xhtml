@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:tp = "http://java.sun.com/jsf/composite/custom_components">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:tp="http://java.sun.com/jsf/composite/custom_components"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 
 <h:head>
@@ -43,8 +44,10 @@
             <b:dataTableColumn value="#{admin.name}" />
 
             <b:dataTableColumn label="Actions">
-                <b:commandButton value="Modifier" icon="edit">
-                </b:commandButton>
+                <c:if test="#{sessionBean.connectedUser.isAnAdministrator()}">
+                    <b:commandButton value="Modifier" icon="edit"  action="#{personBean.edit(admin.id)}">
+                    </b:commandButton>
+                </c:if>
             </b:dataTableColumn>
         </b:dataTable>
         <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />

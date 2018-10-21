@@ -19,7 +19,7 @@ public class PersonFinderBean implements PersonFinder {
     @Override
     public Person findById(Integer id) throws PersonNotFoundException{
         Query query = manager.createQuery(
-                "SELECT p" +
+                "SELECT p " +
                     "FROM Person p " +
                     "WHERE p.id = :id");
         query.setParameter("id", id);

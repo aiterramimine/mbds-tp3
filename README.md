@@ -8,5 +8,5 @@
 
 ## Paramètres DBeaver
 - Nouvelle connexion HSQLDB / Embedded
-- Path = Path absolu jusqu'à target/apache-tomee
+- Path = Path absolu jusqu'à target/apache-tomee/proddb
 - ID = sa, password vide

@@ -4,6 +4,8 @@ import fr.unice.polytech.isa.tcf.*;
 import fr.unice.polytech.isa.tcf.entities.Address;
 import fr.unice.polytech.isa.tcf.entities.Advisor;
 import fr.unice.polytech.isa.tcf.entities.Client;
+import fr.unice.polytech.isa.tcf.entities.Person;
+import fr.unice.polytech.isa.tcf.exceptions.PersonNotFoundException;
 import fr.unice.polytech.isa.tcf.managed.AccountBean;
 
 import javax.ejb.EJB;
@@ -29,6 +31,9 @@ public class PersonBean implements Serializable {
     @EJB private IClientFinder clientFinder;
 
     @EJB private AdvisorFinder advisorFinder;
+
+    @EJB
+    private PersonFinder personFinder;
 
     private static final Logger log = Logger.getLogger(AccountBean.class.getName());
 
@@ -92,6 +97,11 @@ public class PersonBean implements Serializable {
             e.printStackTrace();
             return "../accounts/index?faces-redirect=true&includeViewParams=true";
         }
+    }
+
+    public String edit(int id) {
+        this.id = id;
+        return "../manage?faces-redirect=true&includeViewParams=true";
     }
 
 
