@@ -16,12 +16,6 @@ disponible même si on refait un autre build.
 Pour effecer la base de donnée, veillez lancer la commande "mvn clean"
 avant le "mvn install -DskipTests"
 
-## Maven commands
-- *clean*
-- *tomee:stop*
-- *package -DskipTests*
-- *tomee:run*<br/>
-
 ## Paramètres DBeaver
 - Nouvelle connexion HSQLDB / Embedded
 - Path = Path absolu jusqu'à target/apache-tomee/proddb
