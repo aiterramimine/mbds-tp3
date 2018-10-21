@@ -78,7 +78,7 @@ public class AccountBean implements Serializable {
         System.out.println("Registering");
         try {
             if(getBalance() >= 50) {
-                id = registry.register(getBalance(), getOwner());
+                id = registry.register(getBalance(), getOwner(), coOwners);
                 return "manage?faces-redirect=true&includeViewParams=true";
 
             }
@@ -102,7 +102,7 @@ public class AccountBean implements Serializable {
     }
 
     public void updateOwner() {
-       // System.out.println(owner.getName());
+        // System.out.println(owner.getName());
         hideOwnerCreation = true;
         hasOwner = true;
     }

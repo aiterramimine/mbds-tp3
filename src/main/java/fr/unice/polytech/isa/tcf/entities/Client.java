@@ -67,6 +67,10 @@ public class Client extends Person implements Serializable {
         this.comanagedAccounts = comanagedAccount;
     }
 
+    public void addComanagedAccount(Account a) {
+        comanagedAccounts.add(a);
+    }
+
     public void addOwnAccount(Account a) {
         this.ownAccounts.add(a);
     }

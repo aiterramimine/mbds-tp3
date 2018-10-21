@@ -57,7 +57,7 @@ public class AccountRegistryBean implements IAccountRegistry {
     }
 
     @Override
-    public int register(double initialTransfer, Client client) {
+    public int register(double initialTransfer, Client client, List<Client> coOwners) {
         Client c = em.merge(client);
 
         Account a = new Account();
@@ -65,6 +65,12 @@ public class AccountRegistryBean implements IAccountRegistry {
         a.setOwner(c);
 
         c.addOwnAccount(a);
+
+        for(Client coOwner : coOwners) {
+            Client co = em.merge(coOwner);
+            a.addComanagers(co);
+            co.addComanagedAccount(a);
+        }
 
         em.persist(a);
 

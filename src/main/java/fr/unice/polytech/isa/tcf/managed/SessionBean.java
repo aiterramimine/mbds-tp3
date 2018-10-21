@@ -53,7 +53,7 @@ public class SessionBean implements Serializable {
 
     }
 
-    public String logout() {
+    /*public String logout() {
 //        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         connectedUser = null;
         role = null;
@@ -64,6 +64,6 @@ public class SessionBean implements Serializable {
         String ctx = req.getContextPath();
         String base = url.substring(0, url.length() - uri.length() + ctx.length()) + "/";
         return base +"user/login.jsf";
-    }
+    }*/
 
 }
