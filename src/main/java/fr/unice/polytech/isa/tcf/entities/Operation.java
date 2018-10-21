@@ -10,7 +10,7 @@ import java.util.Date;
 public class Operation implements Serializable {
 
     @Id
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @ManyToOne(cascade = {CascadeType.ALL})
@@ -34,6 +34,9 @@ public class Operation implements Serializable {
         this.date = LocalDate.now();
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public Integer getId() {
         return id;
     }
