@@ -12,9 +12,7 @@
 
             <b:navbarLinks>
 
-                <b:navLink value="Comptes" href="/mbds-tp3/accounts/catalog.jsf"></b:navLink>
-
-                <b:navLink value="Mon conseiller" href="#"></b:navLink>
+                <b:navLink value="Mes comptes" href="/mbds-tp3/accounts/catalog.jsf"></b:navLink>
 
                 <!--<b:navLink value="Mes messages" href="#"></b:navLink>-->
 
@@ -73,8 +71,7 @@
 
             <b:navbarLinks pull="right" styleClass="hidden-xs">
                 <b:dropMenu value="#{sessionBean.name}">
-                    <b:navLink value="Profil" href="#"></b:navLink>
-                    <b:navLink value="Déconnexion" href="#"></b:navLink>
+                    <b:navLink value="Déconnexion" href="#{sessionBean.logout()}"></b:navLink>
                 </b:dropMenu>
             </b:navbarLinks>
         </c:if>
