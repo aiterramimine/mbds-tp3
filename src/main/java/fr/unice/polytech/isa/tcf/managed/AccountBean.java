@@ -63,9 +63,18 @@ public class AccountBean implements Serializable {
     public String create() {
         System.out.println("Registering");
         try {
-            //id = registry.register(getBalance(), getClientName(), getClientAddress());
-            id = registry.register(getBalance(), getOwner());
-            return "manage?faces-redirect=true&includeViewParams=true";
+            if(getBalance() >= 50) {
+                id = registry.register(getBalance(), getOwner());
+                return "manage?faces-redirect=true&includeViewParams=true";
+
+            }
+
+            FacesContext.getCurrentInstance()
+                    .addMessage("form-success",
+                            new FacesMessage("Depot minimal est de 50 Euro"));
+            hasOwner = false;
+            return null;
+
         } catch (Exception e) {
             System.out.print("error creating account : ");
             e.printStackTrace();
