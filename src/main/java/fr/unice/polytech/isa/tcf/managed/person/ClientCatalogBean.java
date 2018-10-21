@@ -22,7 +22,7 @@ public class ClientCatalogBean {
     public void init() {
         clients = new ArrayList<>();
         clients = clientFinder.findAll();
-        System.out.println(clients);
+        //System.out.println(clients);
     }
 
     public void setClients(List<Client> clients) {

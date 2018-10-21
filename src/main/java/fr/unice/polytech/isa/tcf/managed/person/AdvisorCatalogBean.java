@@ -24,7 +24,7 @@ public class AdvisorCatalogBean {
     public void init() {
         advisors = new ArrayList<>();
         advisors = advisorFinder.findAll();
-        System.out.println(advisors);
+//        System.out.println(advisors);
     }
 
     public void setAdvisors(List<Advisor> clients) {
