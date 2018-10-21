@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 @ManagedBean(name = "sessionBean")
@@ -50,6 +51,19 @@ public class SessionBean implements Serializable {
         connectedUser = person;
         return "../accounts/index?faces-redirect=true&includeViewParams=true";
 
+    }
+
+    public String logout() {
+//        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        connectedUser = null;
+        role = null;
+        name = null;
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        StringBuffer url = req.getRequestURL();
+        String uri = req.getRequestURI();
+        String ctx = req.getContextPath();
+        String base = url.substring(0, url.length() - uri.length() + ctx.length()) + "/";
+        return base +"user/login.jsf";
     }
 
 }
