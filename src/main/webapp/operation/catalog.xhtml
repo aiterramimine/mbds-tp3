@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:tp="http://java.sun.com/jsf/composite/custom_components"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<h:head>
+
+    <h:outputStylesheet library="css" name="bankApp.css" />
+    <title> Liste des comptes ouverts dans la banque </title>
+
+</h:head>
+
+<h:body>
+
+    <tp:nav-bar
+            applicationTitle = "MBDS Banque"
+            userName = "Mock username"/>
+
+    <h1> Liste de comptes de la banque </h1>
+
+    <!--<b:messages id="form-error" severity="error,fatal"/>-->
+
+    <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
+
+    <b:growl id="form-error"
+             globalOnly="true"
+             showDetail="true"
+             severity="info,warn"/>
+
+    <c:if test="#{sessionBean.connectedUser.isAClient()}">
+        <h2>Mes comptes</h2>
+
+        <h:form>
+                <b:message />
+
+            <b:dataTable value="#{accountCatalogBean.getAccounts(sessionBean.connectedUser.id)}"
+                         var="account"
+                         class="editableAccountTable"
+                         csv="true">
+
+                <b:dataTableColumn value="#{account.id}"/>
+                <b:dataTableColumn label="Propriétaire" value="#{account.owner.name}" >
+                    <f:facet name="header">
+                        <h:outputText value="Solde (€)" />
+                    </f:facet>
+                    <h:outputText value="#{account.owner.name}"/>
+                </b:dataTableColumn>
+                <b:dataTableColumn>
+                    <f:facet name="header">
+                        <h:outputText value="Solde (€)" />
+                    </f:facet>
+                    <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
+                </b:dataTableColumn>
+                <b:dataTableColumn label="Actions">
+                    <b:commandButton value="Gérer" icon="edit">
+                    </b:commandButton>
+                </b:dataTableColumn>
+            </b:dataTable>
+            <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
+
+        </h:form>
+
+        <c:if test="#{sessionBean.connectedUser.isAClient()}">
+
+        </c:if>
+        <h2>Les comptes que je gère</h2>
+        <h:form>
+                <b:message />
+
+            <b:dataTable value="#{accountCatalogBean.getComanagedAccounts(sessionBean.connectedUser.id)}"
+                         var="account"
+                         class="editableAccountTable"
+                         csv="true">
+
+                <b:dataTableColumn value="#{account.id}"/>
+                <b:dataTableColumn value="#{account.owner.name}" />
+                <b:dataTableColumn>
+                    <f:facet name="header">
+                        <h:outputText value="Solde (€)" />
+                    </f:facet>
+                    <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
+                </b:dataTableColumn>
+                <b:dataTableColumn label="Actions">
+                    <b:commandButton value="Gérer" icon="edit">
+                    </b:commandButton>
+                </b:dataTableColumn>
+            </b:dataTable>
+            <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
+
+        </h:form>
+    </c:if>
+
+    <c:if test="#{sessionBean.connectedUser.isAnAdvisor()}">
+        <h2>Comptes gérés</h2>
+
+        <h:form>
+                <b:message />
+
+            <b:dataTable value="#{accountCatalogBean.getAccountsForAdvisor(sessionBean.connectedUser.id)}"
+                         var="account"
+                         class="editableAccountTable"
+                         csv="true">
+
+                <b:dataTableColumn value="#{account.id}"/>
+                <b:dataTableColumn value="#{account.owner.name}" />
+                <b:dataTableColumn>
+                    <f:facet name="header">
+                        <h:outputText value="Solde (€)" />
+                    </f:facet>
+                    <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
+                </b:dataTableColumn>
+                <b:dataTableColumn label="Actions">
+                    <b:commandButton value="Gérer" icon="edit">
+                    </b:commandButton>
+                </b:dataTableColumn>
+            </b:dataTable>
+            <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
+
+        </h:form>
+    </c:if>
+
+    <c:if test="#{sessionBean.connectedUser.isAnAdministrator()}">
+        <h2>Tous les comptes</h2>
+
+        <h:form>
+                <b:message />
+
+            <b:dataTable value="#{operationCatalogBean.getOperations()}"
+                         var="operation"
+                         class="editableAccountTable"
+                         csv="true">
+
+                <b:dataTableColumn value="#{operation.id}"/>
+                <b:dataTableColumn  value="#{operation.operationType}" />
+                <b:dataTableColumn  label="Montant (Eur)" value="#{operation.amount}" />
+                <b:dataTableColumn  label="Propriétaire" value="#{operation.account.owner.name}" />
+
+            </b:dataTable>
+            <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
+
+        </h:form>
+    </c:if>
+
+
+</h:body>
+
+
+</html>
