@@ -73,6 +73,11 @@ public class AccountBean implements Serializable {
         }
     }
 
+    public String manage(Integer id) {
+        this.id = id;
+        return "manage?faces-redirect=true&includeViewParams=true";
+    }
+
     public void updateOwner() {
        // System.out.println(owner.getName());
         hideOwnerCreation = true;

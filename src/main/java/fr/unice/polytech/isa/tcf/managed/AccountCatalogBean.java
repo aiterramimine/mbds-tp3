@@ -50,4 +50,5 @@ public class AccountCatalogBean implements Serializable {
         return "creditor";
     }
 
+
 }

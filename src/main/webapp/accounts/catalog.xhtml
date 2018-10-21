@@ -136,7 +136,7 @@
                          csv="true">
 
                 <b:dataTableColumn value="#{account.id}"/>
-                <b:dataTableColumn value="#{account.owner.name}" />
+                <b:dataTableColumn label="Propriétaire" value="#{account.owner.name}" />
                 <b:dataTableColumn>
                     <f:facet name="header">
                         <h:outputText value="Solde (€)" />
@@ -144,7 +144,7 @@
                     <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
                 </b:dataTableColumn>
                 <b:dataTableColumn label="Actions">
-                    <b:commandButton value="Gérer" icon="edit">
+                    <b:commandButton value="Gérer" icon="edit" action = "#{accountBean.manage(account.id)}">
                     </b:commandButton>
                 </b:dataTableColumn>
             </b:dataTable>
