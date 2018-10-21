@@ -55,7 +55,7 @@
                     <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
                 </b:dataTableColumn>
                 <b:dataTableColumn label="Actions">
-                    <b:commandButton value="Gérer" icon="edit">
+                    <b:commandButton value="Gérer" icon="edit" action = "#{accountBean.manage(account.id)}">
                     </b:commandButton>
                 </b:dataTableColumn>
             </b:dataTable>
@@ -84,7 +84,7 @@
                     <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
                 </b:dataTableColumn>
                 <b:dataTableColumn label="Actions">
-                    <b:commandButton value="Gérer" icon="edit">
+                    <b:commandButton value="Gérer" icon="edit" action = "#{accountBean.manage(account.id)}">
                     </b:commandButton>
                 </b:dataTableColumn>
             </b:dataTable>
@@ -113,7 +113,7 @@
                     <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
                 </b:dataTableColumn>
                 <b:dataTableColumn label="Actions">
-                    <b:commandButton value="Gérer" icon="edit">
+                    <b:commandButton value="Gérer" icon="edit" action = "#{accountBean.manage(account.id)}">
                     </b:commandButton>
                 </b:dataTableColumn>
             </b:dataTable>
