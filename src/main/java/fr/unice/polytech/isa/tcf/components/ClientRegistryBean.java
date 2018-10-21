@@ -19,15 +19,13 @@ public class ClientRegistryBean implements ClientRegistration {
 
     @Override
     public int register(String name, String town, String address, int zipcode, Advisor advisor) {
-        System.out.println("REGISTER USER");
+        Client c = new Client();
+        c.setName(name);
 
         Address ad = new Address();
         ad.setTown(town);
         ad.setAddress(address);
         ad.setZipcode(zipcode);
-
-        Client c = new Client();
-        c.setName(name);
 
         c.setAddress(ad);
         ad.setPerson(c);
@@ -35,12 +33,7 @@ public class ClientRegistryBean implements ClientRegistration {
         c.setAdvisor(advisor);
         advisor.addClient(c);
 
-        //manager.persist(c);
-
-        //advisor.addClient(c);
         manager.merge(advisor);
-
-        //System.out.println(a.getNumClients());
 
         manager.flush();
 
