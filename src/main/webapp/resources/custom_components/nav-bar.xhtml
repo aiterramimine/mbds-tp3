@@ -2,41 +2,84 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-
-<composite:interface>
-    <composite:attribute name = "userName"/>
-    <composite:attribute name = "applicationTitle"/>
-
-</composite:interface>
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <composite:implementation>
 
-    <b:navBar brand="#{cc.attrs.applicationTitle}" brandHref="#" id="dropMenuExample" inverse="true">
-        <b:navbarLinks>
-            <b:dropMenu value="#{cc.attrs.userName}">
-                <b:navLink value="Profil" href="#"></b:navLink>
-                <b:navLink value="Lougout" href="#"></b:navLink>
-            </b:dropMenu>
+    <b:navBar brand="MBDS Banque" brandHref="#" id="dropMenuExample" inverse="true">
 
-            <b:navLink value="Comptes" href="/mbds-tp3/accounts/catalog.jsf"></b:navLink>
+        <c:if test="#{sessionBean.connectedUser.isAClient()}">
 
-            <b:navLink value="Operation" href="/mbds-tp3/operation/catalog.jsf"></b:navLink>
+            <b:navbarLinks>
+
+                <b:navLink value="Comptes" href="/mbds-tp3/accounts/catalog.jsf"></b:navLink>
+
+                <b:navLink value="Mon conseiller" href="#"></b:navLink>
+
+                <!--<b:navLink value="Mes messages" href="#"></b:navLink>-->
+
+            </b:navbarLinks>
+
+            <b:navbarLinks pull="right" styleClass="hidden-xs">
+                <b:dropMenu value="#{sessionBean.name}">
+                    <b:navLink value="Profil" href="#"></b:navLink>
+                    <b:navLink value="Déconnexion" href="#"></b:navLink>
+                </b:dropMenu>
+            </b:navbarLinks>
+        </c:if>
+
+        <c:if test="#{sessionBean.connectedUser.isAnAdvisor()}">
+
+            <b:navbarLinks>
+
+                <b:dropMenu value="Compte">
+                    <b:navLink value="Créer un compte" href="/mbds-tp3/accounts/index.jsf"></b:navLink>
+                    <b:navLink value="Visualiser les comptes clients" href="/mbds-tp3/accounts/catalog.jsf"></b:navLink>
+                </b:dropMenu>
+
+                <b:navLink value="Mes clients" href="/mbds-tp3/person/catalogs/client.jsf"></b:navLink>
+
+                <!--<b:navLink value="Mes messages" href="#"></b:navLink>-->
+
+            </b:navbarLinks>
+
+            <b:navbarLinks pull="right" styleClass="hidden-xs">
+                <b:dropMenu value="#{sessionBean.name}">
+                    <b:navLink value="Profil" href="#"></b:navLink>
+                    <b:navLink value="Déconnexion" href="#"></b:navLink>
+                </b:dropMenu>
+            </b:navbarLinks>
+        </c:if>
+
+        <c:if test="#{sessionBean.connectedUser.isAnAdministrator()}">
+
+            <b:navbarLinks>
+
+                <b:dropMenu value="Comptes">
+                    <b:navLink value="Créer un compte" href="/mbds-tp3/accounts/index.jsf"></b:navLink>
+                    <b:navLink value="Visualiser tous les comptes" href="/mbds-tp3/accounts/catalog.jsf"></b:navLink>
+                </b:dropMenu>
+
+                <b:dropMenu value="Utilisateurs">
+                    <b:navLink value="Créer un utilisateur" href="/mbds-tp3/accounts/index.jsf"></b:navLink>
+                    <b:navLink value="Visualiser tous les clients" href="/mbds-tp3/person/catalogs/client.jsf"></b:navLink>
+                    <b:navLink value="Visualiser tous les conseillers" href="/mbds-tp3/person/catalogs/advisor.jsf"></b:navLink>
+                    <b:navLink value="Visualiser tous les administrateurs" href="/mbds-tp3/person/catalogs/admin.jsf"></b:navLink>
+                </b:dropMenu>
+
+                <!--<b:navLink value="Mes messages" href="#"></b:navLink>-->
+
+            </b:navbarLinks>
+
+            <b:navbarLinks pull="right" styleClass="hidden-xs">
+                <b:dropMenu value="#{sessionBean.name}">
+                    <b:navLink value="Profil" href="#"></b:navLink>
+                    <b:navLink value="Déconnexion" href="#"></b:navLink>
+                </b:dropMenu>
+            </b:navbarLinks>
+        </c:if>
 
 
-            <b:dropMenu value="Catalogs">
-                <b:navLink value="Clients" href="/mbds-tp3/person/catalogs/client.jsf"></b:navLink>
-                <b:navLink value="Administrateurs" href="/mbds-tp3/person/catalogs/admin.jsf"></b:navLink>
-                <b:navLink value="Conseillers" href="/mbds-tp3/person/catalogs/advisor.jsf"></b:navLink>
-            </b:dropMenu>
-
-            <b:dropMenu value="Créer">
-                <b:navLink value="Personne" href="/mbds-tp3/person/index.jsf"></b:navLink>
-                <b:navLink value="Compte" href="/mbds-tp3/accounts/index.jsf"></b:navLink>
-            </b:dropMenu>
-
-        </b:navbarLinks>
     </b:navBar>
 
 </composite:implementation>

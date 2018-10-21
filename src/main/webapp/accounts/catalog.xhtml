@@ -17,9 +17,7 @@
 
 <h:body>
 
-    <tp:nav-bar
-            applicationTitle = "MBDS Banque"
-            userName = "Mock username"/>
+    <tp:nav-bar/>
 
     <h1> Liste de comptes de la banque </h1>
 
@@ -44,9 +42,9 @@
                          csv="true">
 
                 <b:dataTableColumn value="#{account.id}"/>
-                <b:dataTableColumn label="Propriétaire" value="#{account.owner.name}" >
+                <b:dataTableColumn label="Propriétaire" >
                     <f:facet name="header">
-                        <h:outputText value="Solde (€)" />
+                        <h:outputText value="Propriétaire" />
                     </f:facet>
                     <h:outputText value="#{account.owner.name}"/>
                 </b:dataTableColumn>
