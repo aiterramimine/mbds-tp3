@@ -1,10 +1,8 @@
 package fr.unice.polytech.isa.tcf.managed.person;
 
-import fr.unice.polytech.isa.tcf.AdministratorRegistration;
-import fr.unice.polytech.isa.tcf.AdvisorFinder;
-import fr.unice.polytech.isa.tcf.AdvisorRegistration;
-import fr.unice.polytech.isa.tcf.ClientRegistration;
+import fr.unice.polytech.isa.tcf.*;
 import fr.unice.polytech.isa.tcf.entities.Advisor;
+import fr.unice.polytech.isa.tcf.entities.Client;
 import fr.unice.polytech.isa.tcf.managed.AccountBean;
 
 import javax.ejb.EJB;
@@ -26,6 +24,8 @@ public class PersonBean implements Serializable {
     @EJB private AdvisorRegistration advisorRegistration;
 
     @EJB private ClientRegistration clientRegistration;
+
+    @EJB private IClientFinder clientFinder;
 
     @EJB private AdvisorFinder advisorFinder;
 
@@ -104,6 +104,10 @@ public class PersonBean implements Serializable {
         return advisorFinder.findAll();
     }
 
+    public List<Client> getAllClients() {
+        return clientFinder.findAll();
+    }
+
     public Integer getId() {
         return id;
     }
@@ -143,4 +147,5 @@ public class PersonBean implements Serializable {
     public String getSelectedAdvisorId() {
         return selectedAdvisorId;
     }
+
 }

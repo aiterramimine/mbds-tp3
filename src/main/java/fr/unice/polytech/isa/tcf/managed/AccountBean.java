@@ -3,20 +3,19 @@ package fr.unice.polytech.isa.tcf.managed;
 import fr.unice.polytech.isa.tcf.ClientRegistration;
 import fr.unice.polytech.isa.tcf.IAccountFinder;
 import fr.unice.polytech.isa.tcf.IAccountRegistry;
+import fr.unice.polytech.isa.tcf.IClientFinder;
 import fr.unice.polytech.isa.tcf.components.AccountOperationsBean;
 import fr.unice.polytech.isa.tcf.components.AccountRegistryBean;
 import fr.unice.polytech.isa.tcf.entities.Account;
 import fr.unice.polytech.isa.tcf.entities.Client;
 import fr.unice.polytech.isa.tcf.entities.Constants;
+import fr.unice.polytech.isa.tcf.managed.person.PersonBean;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.logging.Logger;
@@ -28,6 +27,8 @@ public class AccountBean implements Serializable {
     @EJB private IAccountFinder finder;
     @EJB private IAccountRegistry registry;
     @EJB private ClientRegistration clientRegistry;
+
+    @EJB private IClientFinder clientFinder;
 
     private static final Logger log = Logger.getLogger(AccountBean.class.getName());
 
@@ -47,11 +48,16 @@ public class AccountBean implements Serializable {
 
     private Boolean hasOwner;
 
+    private Boolean hideOwnerSelection;
+
+    private Integer selectedOwnerId;
+
     @PostConstruct
     public void init() {
         owner = new Client();
         hideOwnerCreation = true;
         hasOwner = false;
+        hideOwnerSelection = true;
     }
 
     public String create() {
@@ -68,9 +74,18 @@ public class AccountBean implements Serializable {
     }
 
     public void updateOwner() {
-        System.out.println(owner.getName());
+       // System.out.println(owner.getName());
         hideOwnerCreation = true;
         hasOwner = true;
+    }
+
+    public void updateOwnerAfterSelection() {
+        System.out.println(selectedOwnerId);
+        owner = clientFinder.findById(selectedOwnerId);
+        System.out.println(owner.getName());
+        hideOwnerSelection = true;
+        hasOwner = true;
+
     }
 
     public String search() {
@@ -80,6 +95,11 @@ public class AccountBean implements Serializable {
 
     public void createOwner() {
         hideOwnerCreation = false;
+    }
+
+    public void selectOwner() {
+        hideOwnerCreation = true;
+        hideOwnerSelection = false;
     }
 
     public void setCoOwner() {
@@ -152,5 +172,21 @@ public class AccountBean implements Serializable {
 
     public void setHasOwner(Boolean hasOwner) {
         this.hasOwner = hasOwner;
+    }
+
+    public Boolean getHideOwnerSelection() {
+        return hideOwnerSelection;
+    }
+
+    public void setHideOwnerSelection(Boolean hideOwnerSelection) {
+        this.hideOwnerSelection = hideOwnerSelection;
+    }
+
+    public Integer getSelectedOwnerId() {
+        return selectedOwnerId;
+    }
+
+    public void setSelectedOwnerId(Integer selectedOwnerId) {
+        this.selectedOwnerId = selectedOwnerId;
     }
 }

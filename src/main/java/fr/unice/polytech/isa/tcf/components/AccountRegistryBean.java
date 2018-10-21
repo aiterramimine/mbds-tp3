@@ -54,13 +54,16 @@ public class AccountRegistryBean implements IAccountRegistry {
 
     @Override
     public int register(double initialTransfer, Client client) {
+        Client c = em.merge(client);
+
         Account a = new Account();
         a.setBalance(initialTransfer);
-        a.setOwner(client);
+        a.setOwner(c);
 
+        c.addOwnAccount(a);
 
         em.persist(a);
-        //em.persist(a);
+
         em.flush();
 
         return a.getId();

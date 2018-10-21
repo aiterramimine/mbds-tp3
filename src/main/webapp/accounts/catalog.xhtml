@@ -44,7 +44,12 @@
                          csv="true">
 
                 <b:dataTableColumn value="#{account.id}"/>
-                <b:dataTableColumn label="Propriétaire" value="#{account.owner.name}" />
+                <b:dataTableColumn label="Propriétaire" value="#{account.owner.name}" >
+                    <f:facet name="header">
+                        <h:outputText value="Solde (€)" />
+                    </f:facet>
+                    <h:outputText value="#{account.owner.name}"/>
+                </b:dataTableColumn>
                 <b:dataTableColumn>
                     <f:facet name="header">
                         <h:outputText value="Solde (€)" />

@@ -15,4 +15,6 @@ public interface IClientFinder {
 
     List<Client> findAllAdvisorClients(int idAdvisor);
 
+    Client findById(Integer id);
+
 }

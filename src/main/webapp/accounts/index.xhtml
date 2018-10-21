@@ -18,7 +18,7 @@
 
         <tp:nav-bar
                 applicationTitle = "MBDS Banque"
-                userName = "Mock user"/>
+                userName = "#{sessionBean.name}"/>
 
 
         <h1> Création de compte </h1>
@@ -55,7 +55,7 @@
                                         <b:commandButton value="Créer" style="width: 100%;" action="#{accountBean.createOwner()}"/>
                                     </b:column>
                                     <b:column span="4">
-                                        <b:button value="Séléctionner" style="width: 100%;"/>
+                                        <b:commandButton value="Séléctionner" style="width: 100%;" action="#{accountBean.selectOwner()}"/>
                                     </b:column>
                                 </h:panelGroup>
 
@@ -83,15 +83,18 @@
 
                     <b:column span="3">
 
-                        <h:panelGroup render="#{!accountBean.hideOwnerCreation}">
+                        <tp:user-creation
+                                title="Nouveau client"
+                                user="#{accountBean.owner}"
+                                updatingUserAction="#{accountBean.updateOwner()}"
+                                hidden="#{accountBean.hideOwnerCreation}" />
 
-                            <tp:user-creation
-                                    title="Nouveau client"
-                                    user="#{accountBean.owner}"
-                                    updatingUserAction="#{accountBean.updateOwner()}"
-                                    hidden="#{accountBean.hideOwnerCreation}" />
-                        </h:panelGroup>
-
+                        <tp:user-selection
+                                title="Séléctionnez le propriétaire"
+                                users="#{personBean.getAllClients()}"
+                                updatingUserAction="#{accountBean.updateOwnerAfterSelection()}"
+                                selectedUserId="#{accountBean.selectedOwnerId}"
+                                hidden="#{accountBean.hideOwnerSelection}" />
 
                     </b:column>
 

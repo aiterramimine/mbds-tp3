@@ -44,6 +44,7 @@
             <b:dataTableColumn value="#{client.id}"/>
             <b:dataTableColumn value="#{client.name}" />
             <b:dataTableColumn label="advisor" value="#{client.advisor.name}" />
+            <b:dataTableColumn label="Nb comptes" value="#{client.ownAccounts.size()}" />
 
             <b:dataTableColumn label="Actions">
                 <b:commandButton value="Modifier" icon="edit">

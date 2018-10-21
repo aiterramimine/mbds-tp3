@@ -1,14 +1,18 @@
 package fr.unice.polytech.isa.tcf.components;
 
 import fr.unice.polytech.isa.tcf.IClientFinder;
+import fr.unice.polytech.isa.tcf.entities.Account;
+import fr.unice.polytech.isa.tcf.entities.Advisor;
 import fr.unice.polytech.isa.tcf.entities.Client;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
 
 @Stateless
 public class IClientFinderBean implements IClientFinder {
@@ -42,5 +46,13 @@ public class IClientFinderBean implements IClientFinder {
         query.setParameter("id", idAdvisor);
 
         return query.getResultList();
+    }
+
+    @Override
+    public Client findById(Integer id) {
+        Query query = manager.createQuery("SELECT c FROM Client c WHERE c.id = :id");
+        query.setParameter("id", id);
+        List<Client> results = query.getResultList();
+        return results.isEmpty() ? null : results.get(0);
     }
 }
