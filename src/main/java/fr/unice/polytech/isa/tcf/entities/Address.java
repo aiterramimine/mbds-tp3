@@ -10,13 +10,11 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotNull
     private String town;
 
     @NotNull
     private String address;
 
-    @NotNull
     @Column(length = 5)
     private int zipcode;
 
