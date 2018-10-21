@@ -49,6 +49,10 @@ public class SessionBean implements Serializable {
         }
 
         connectedUser = person;
+        if(person.isAClient()) {
+            return "../accounts/catalog?faces-redirect=true&includeViewParams=true";
+        }
+
         return "../accounts/index?faces-redirect=true&includeViewParams=true";
 
     }

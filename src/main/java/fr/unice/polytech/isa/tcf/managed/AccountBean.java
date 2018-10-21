@@ -92,7 +92,7 @@ public class AccountBean implements Serializable {
         } catch (Exception e) {
             System.out.print("error creating account : ");
             e.printStackTrace();
-            return Signal.UNKOWN;
+            return null;
         }
     }
 

@@ -30,99 +30,8 @@
              showDetail="true"
              severity="info,warn"/>
 
-    <c:if test="#{sessionBean.connectedUser.isAClient()}">
-        <h2>Mes comptes</h2>
 
-        <h:form>
-                <b:message />
 
-            <b:dataTable value="#{accountCatalogBean.getAccounts(sessionBean.connectedUser.id)}"
-                         var="account"
-                         class="editableAccountTable"
-                         csv="true">
-
-                <b:dataTableColumn value="#{account.id}"/>
-                <b:dataTableColumn label="Propriétaire" value="#{account.owner.name}" >
-                    <f:facet name="header">
-                        <h:outputText value="Solde (€)" />
-                    </f:facet>
-                    <h:outputText value="#{account.owner.name}"/>
-                </b:dataTableColumn>
-                <b:dataTableColumn>
-                    <f:facet name="header">
-                        <h:outputText value="Solde (€)" />
-                    </f:facet>
-                    <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
-                </b:dataTableColumn>
-                <b:dataTableColumn label="Actions">
-                    <b:commandButton value="Gérer" icon="edit">
-                    </b:commandButton>
-                </b:dataTableColumn>
-            </b:dataTable>
-            <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
-
-        </h:form>
-
-        <c:if test="#{sessionBean.connectedUser.isAClient()}">
-
-        </c:if>
-        <h2>Les comptes que je gère</h2>
-        <h:form>
-                <b:message />
-
-            <b:dataTable value="#{accountCatalogBean.getComanagedAccounts(sessionBean.connectedUser.id)}"
-                         var="account"
-                         class="editableAccountTable"
-                         csv="true">
-
-                <b:dataTableColumn value="#{account.id}"/>
-                <b:dataTableColumn value="#{account.owner.name}" />
-                <b:dataTableColumn>
-                    <f:facet name="header">
-                        <h:outputText value="Solde (€)" />
-                    </f:facet>
-                    <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
-                </b:dataTableColumn>
-                <b:dataTableColumn label="Actions">
-                    <b:commandButton value="Gérer" icon="edit">
-                    </b:commandButton>
-                </b:dataTableColumn>
-            </b:dataTable>
-            <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
-
-        </h:form>
-    </c:if>
-
-    <c:if test="#{sessionBean.connectedUser.isAnAdvisor()}">
-        <h2>Comptes gérés</h2>
-
-        <h:form>
-                <b:message />
-
-            <b:dataTable value="#{accountCatalogBean.getAccountsForAdvisor(sessionBean.connectedUser.id)}"
-                         var="account"
-                         class="editableAccountTable"
-                         csv="true">
-
-                <b:dataTableColumn value="#{account.id}"/>
-                <b:dataTableColumn value="#{account.owner.name}" />
-                <b:dataTableColumn>
-                    <f:facet name="header">
-                        <h:outputText value="Solde (€)" />
-                    </f:facet>
-                    <h:outputText value="#{account.balance}" styleClass="balance #{accountCatalogBean.getBalanceStyle(account.balance)}" />
-                </b:dataTableColumn>
-                <b:dataTableColumn label="Actions">
-                    <b:commandButton value="Gérer" icon="edit">
-                    </b:commandButton>
-                </b:dataTableColumn>
-            </b:dataTable>
-            <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
-
-        </h:form>
-    </c:if>
-
-    <c:if test="#{sessionBean.connectedUser.isAnAdministrator()}">
         <h2>Tous les comptes</h2>
 
         <h:form>
@@ -142,7 +51,6 @@
             <b:messages only-most-severe="true" value="large-screen='full-width'" large-screen="full-width" />
 
         </h:form>
-    </c:if>
 
 
 </h:body>

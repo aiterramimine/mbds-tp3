@@ -2,13 +2,11 @@ package fr.unice.polytech.isa.tcf.managed;
 
 import fr.unice.polytech.isa.tcf.*;
 import fr.unice.polytech.isa.tcf.entities.*;
-import fr.unice.polytech.isa.tcf.exceptions.AlreadyExistingClientException;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import java.sql.SQLOutput;
 
 @ManagedBean(name = "applicationInitBean", eager = true)
 @ApplicationScoped

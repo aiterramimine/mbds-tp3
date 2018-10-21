@@ -86,15 +86,14 @@ public class Client extends Person implements Serializable {
     public boolean equals(Object o) {
         if (this == o)
             return true;
-        if (!(o instanceof Customer))
+        if (!(o instanceof Client))
             return false;
 
-        Customer customer = (Customer) o;
+        Client customer = (Client) o;
 
         if (getName() != null ? !getName().equals(customer.getName()) : customer.getName() != null)
             return false;
-        if (getAddress() != null ? !getAddress().equals(customer.getCreditCard()) : customer.getCreditCard() != null)
-            return false;
+
         return true;
 
     }
