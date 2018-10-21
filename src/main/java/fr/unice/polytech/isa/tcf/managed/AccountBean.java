@@ -18,6 +18,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @ManagedBean(name="accountBean")
@@ -44,6 +46,10 @@ public class AccountBean implements Serializable {
 
     private Client owner;
 
+    private List<Client> coOwners;
+
+    private Integer selectedCoOwnerId;
+
     private Boolean hideOwnerCreation;
 
     private Boolean hasOwner;
@@ -52,12 +58,20 @@ public class AccountBean implements Serializable {
 
     private Integer selectedOwnerId;
 
+    private Boolean hideCoOwnerSelection;
+
+    private Boolean hasCoOwners;
+
     @PostConstruct
     public void init() {
         owner = new Client();
-        hideOwnerCreation = true;
         hasOwner = false;
+        hasCoOwners = false;
         hideOwnerSelection = true;
+        hideCoOwnerSelection = true;
+        hideOwnerCreation = true;
+
+        coOwners = new ArrayList<>();
     }
 
     public String create() {
@@ -94,12 +108,16 @@ public class AccountBean implements Serializable {
     }
 
     public void updateOwnerAfterSelection() {
-        System.out.println(selectedOwnerId);
         owner = clientFinder.findById(selectedOwnerId);
-        System.out.println(owner.getName());
         hideOwnerSelection = true;
         hasOwner = true;
+    }
 
+    public void updateCoOwnerAfterSelection() {
+        Client newCoOwner = clientFinder.findById(selectedCoOwnerId);
+        coOwners.add(newCoOwner);
+
+        hideCoOwnerSelection = true;
     }
 
     public String search() {
@@ -109,11 +127,23 @@ public class AccountBean implements Serializable {
 
     public void createOwner() {
         hideOwnerCreation = false;
+
+        hideOwnerSelection = true;
+        hideCoOwnerSelection = true;
     }
 
     public void selectOwner() {
-        hideOwnerCreation = true;
         hideOwnerSelection = false;
+
+        hideOwnerCreation = true;
+        hideCoOwnerSelection = true;
+    }
+
+    public void selectCoOwner() {
+        hideCoOwnerSelection = false;
+
+        hideOwnerSelection = true;
+        hideOwnerCreation = true;
     }
 
     public void setCoOwner() {
@@ -202,5 +232,37 @@ public class AccountBean implements Serializable {
 
     public void setSelectedOwnerId(Integer selectedOwnerId) {
         this.selectedOwnerId = selectedOwnerId;
+    }
+
+    public Boolean getHideCoOwnerSelection() {
+        return hideCoOwnerSelection;
+    }
+
+    public void setHideCoOwnerSelection(Boolean hideCoOwnerSelection) {
+        this.hideCoOwnerSelection = hideCoOwnerSelection;
+    }
+
+    public Boolean getHasCoOwners() {
+        return hasCoOwners;
+    }
+
+    public void setHasCoOwners(Boolean hasCoOwners) {
+        this.hasCoOwners = hasCoOwners;
+    }
+
+    public Integer getSelectedCoOwnerId() {
+        return selectedCoOwnerId;
+    }
+
+    public void setSelectedCoOwnerId(Integer selectedCoOwnerId) {
+        this.selectedCoOwnerId = selectedCoOwnerId;
+    }
+
+    public List<Client> getCoOwners() {
+        return coOwners;
+    }
+
+    public void setCoOwners(List<Client> coOwners) {
+        this.coOwners = coOwners;
     }
 }

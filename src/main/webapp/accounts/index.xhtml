@@ -70,9 +70,11 @@
                                     <h:outputText value="Co gérants:"/>
                                 </b:column>
 
-                                <b:column span="8">
-                                    <b:commandButton value="Séléctionner" style="width: 100%;" action="#{accountBean.setCoOwner()}"/>
-                                </b:column>
+                                <h:panelGroup style="display:#{accountBean.coOwners.size() != 0 ? 'none' : 'block'}">
+                                    <b:column span="8">
+                                        <b:commandButton value="Séléctionner" style="width: 100%;" action="#{accountBean.selectCoOwner()}"/>
+                                    </b:column>
+                                </h:panelGroup>
                             </b:row>
 
                         </b:panel>
@@ -93,6 +95,13 @@
                                 updatingUserAction="#{accountBean.updateOwnerAfterSelection()}"
                                 selectedUserId="#{accountBean.selectedOwnerId}"
                                 hidden="#{accountBean.hideOwnerSelection}" />
+
+                        <tp:user-selection
+                                title="Séléctionnez un co-gérant"
+                                users="#{personBean.getAllClients()}"
+                                updatingUserAction="#{accountBean.updateCoOwnerAfterSelection()}"
+                                selectedUserId="#{accountBean.selectedCoOwnerId}"
+                                hidden="#{accountBean.hideCoOwnerSelection}" />
 
                     </b:column>
 
