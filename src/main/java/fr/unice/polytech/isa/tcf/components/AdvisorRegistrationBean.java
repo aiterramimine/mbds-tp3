@@ -16,8 +16,11 @@ public class AdvisorRegistrationBean implements AdvisorRegistration {
     private EntityManager manager;
 
     @Override
-    public int register(String name, String town, String street, int zipcode) {
-        Address ad = new Address(town, street, zipcode);
+    public int register(String name, String town, String address, int zipcode) {
+        Address ad = new Address();
+        ad.setTown(town);
+        ad.setAddress(address);
+        ad.setZipcode(zipcode);
 
         Advisor advisor = new Advisor();
         advisor.setName(name);
@@ -33,12 +36,18 @@ public class AdvisorRegistrationBean implements AdvisorRegistration {
 
     @Override
     public Advisor registerWithReturn(String name, String town, String address, int zipcode) {
-        Address ad = new Address(town, address, zipcode);
+        Address ad = new Address();
+        ad.setTown(town);
+        ad.setAddress(address);
+        ad.setZipcode(zipcode);
+
         Advisor advisor = new Advisor();
         advisor.setName(name);
+
         advisor.setAddress(ad);
         ad.setPerson(advisor);
 
+        manager.persist(ad);
         manager.persist(advisor);
         manager.flush();
 
