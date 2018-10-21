@@ -70,12 +70,21 @@
                                     <h:outputText value="Co gérants:"/>
                                 </b:column>
 
-                                <h:panelGroup style="display:#{accountBean.coOwners.size() != 0 ? 'none' : 'block'}">
                                     <b:column span="8">
-                                        <b:commandButton value="Séléctionner" style="width: 100%;" action="#{accountBean.selectCoOwner()}"/>
+                                        <b:commandButton value="Ajouter" style="width: 100%;" action="#{accountBean.selectCoOwner()}"/>
                                     </b:column>
-                                </h:panelGroup>
                             </b:row>
+
+                            <ui:repeat value="#{accountBean.coOwners}" var="coOwner">
+                                <b:row style="padding-top: 10px;">
+                                    <b:column span="4">
+                                    </b:column>
+
+                                    <b:column span="8">
+                                        <h:outputText value="#{coOwner.name}"/>
+                                    </b:column>
+                                </b:row>
+                            </ui:repeat>
 
                         </b:panel>
                         <b:commandButton action="#{accountBean.create}" value="Créer" look="primary"/>

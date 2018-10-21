@@ -25,6 +25,7 @@ public abstract class Person implements Serializable {
 
     public Person() {
         address = new Address();
+        address.setPerson(this);
     }
 
 //    public Person(String name, String address) {
