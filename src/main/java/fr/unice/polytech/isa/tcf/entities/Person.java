@@ -17,13 +17,19 @@ public abstract class Person implements Serializable {
     @Column(unique = true)
     protected String name;
 
-    @NotNull
-    protected String address;
+    @OneToOne(cascade = {CascadeType.ALL})
+    @MapsId
+    protected Address address;
 
     public Person() {
     }
 
-    public Person(String name, String address) {
+//    public Person(String name, String address) {
+//        this.name = name;
+//        this.address = new Address();
+//    }
+
+    public Person(String name, Address address) {
         this.name = name;
         this.address = address;
     }
@@ -44,11 +50,11 @@ public abstract class Person implements Serializable {
         this.name = name;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

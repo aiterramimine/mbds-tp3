@@ -29,10 +29,15 @@
                 <h:outputText value='Nom de la personne :'/>
                 <h:inputText value='#{personBean.name}' required="true">
                     </h:inputText>
-
+                <h:outputText value='Ville : '/>
+                <h:inputText value='#{personBean.town}' required="true">
+                </h:inputText>
                 <h:outputText value='Addresse : '/>
                 <h:inputText value='#{personBean.address}' required="true">
                     </h:inputText>
+                <h:outputText value='Code postal : '/>
+                <h:inputText value='#{personBean.zipcode}' required="true">
+                </h:inputText>
 
                 <!--<h:outputText id="advisorIDLabel" value='Advisor ID : '/>-->
                 <!--<h:inputText id="advisorIDText" name="advisorID">-->

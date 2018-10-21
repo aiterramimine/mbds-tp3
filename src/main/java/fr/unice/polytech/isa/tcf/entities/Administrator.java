@@ -10,7 +10,7 @@ public class Administrator extends Person implements Serializable {
         super();
     }
 
-    public Administrator(String name, String address) {
+    public Administrator(String name, Address address) {
         super(name, address);
     }
 

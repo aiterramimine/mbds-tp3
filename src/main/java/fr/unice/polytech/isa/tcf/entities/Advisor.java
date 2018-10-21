@@ -28,7 +28,7 @@ public class Advisor extends Person implements Serializable {
         clients = new ArrayList<>();
     }
 
-    public Advisor(String name, String address) {
+    public Advisor(String name, Address address) {
         super(name, address);
         clients = new ArrayList<>();
     }

@@ -3,7 +3,7 @@ package fr.unice.polytech.isa.tcf;
 import fr.unice.polytech.isa.tcf.entities.Advisor;
 
 public interface AdvisorRegistration {
-    public int register(String name, String address);
+    public int register(String name, String town, String address, int zipcode);
 
-    public Advisor registerWithReturn(String name, String address);
+    Advisor registerWithReturn(String name, String town, String address, int zipcode);
 }

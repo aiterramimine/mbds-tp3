@@ -28,11 +28,19 @@ public class Client extends Person implements Serializable {
         comanagedAccounts = new ArrayList<>();
     }
 
-    public Client(String name, String address) {
+//    public Client(String name, String address) {
+//        super(name, address);
+//        ownAccounts = new ArrayList<>();
+//        comanagedAccounts = new ArrayList<>();
+//    }
+
+    public Client(String name, Address address) {
         super(name, address);
         ownAccounts = new ArrayList<>();
         comanagedAccounts = new ArrayList<>();
     }
+
+
 
     public Advisor getAdvisor() {
         return advisor;

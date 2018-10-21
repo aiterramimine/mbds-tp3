@@ -1,6 +1,7 @@
 package fr.unice.polytech.isa.tcf.managed.person;
 
 import fr.unice.polytech.isa.tcf.*;
+import fr.unice.polytech.isa.tcf.entities.Address;
 import fr.unice.polytech.isa.tcf.entities.Advisor;
 import fr.unice.polytech.isa.tcf.entities.Client;
 import fr.unice.polytech.isa.tcf.managed.AccountBean;
@@ -35,7 +36,11 @@ public class PersonBean implements Serializable {
 
     private String name;
 
+    private Address fullAddress;
+    private String town;
     private String address;
+    private int zipcode;
+
 
     private String role;
 
@@ -69,14 +74,14 @@ public class PersonBean implements Serializable {
                 //int idAdvisor = Integer.parseInt(req.getParameter("idAdvisor"));
                 Advisor advisor = advisorFinder.findById(Integer.parseInt(selectedAdvisorId));
 
-                idCreated = clientRegistration.register(name, address, advisor);
+                idCreated = clientRegistration.register(name, town, address, zipcode, advisor);
                 System.out.print("New client : " + idCreated + " | advisor : " + advisor.getName() + " | ");
 
             } else if (this.role.equals("advisor")) {
-                idCreated = advisorRegistration.register(getName(), getAddress());
+                idCreated = advisorRegistration.register(getName(), town, address, zipcode);
                 System.out.print("New advisor : " + idCreated + " | ");
             } else {
-                idCreated = administratorRegistration.register(getName(), getAddress());
+                idCreated = administratorRegistration.register(getName(), town, address, zipcode);
                 System.out.print("New administrator : " + idCreated + " | ");
             }
 
@@ -148,4 +153,19 @@ public class PersonBean implements Serializable {
         return selectedAdvisorId;
     }
 
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public int getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(int zipcode) {
+        this.zipcode = zipcode;
+    }
 }

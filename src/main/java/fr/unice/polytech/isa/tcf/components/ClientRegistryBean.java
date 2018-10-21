@@ -1,6 +1,7 @@
 package fr.unice.polytech.isa.tcf.components;
 
 import fr.unice.polytech.isa.tcf.ClientRegistration;
+import fr.unice.polytech.isa.tcf.entities.Address;
 import fr.unice.polytech.isa.tcf.entities.Advisor;
 import fr.unice.polytech.isa.tcf.entities.Client;
 
@@ -17,11 +18,13 @@ public class ClientRegistryBean implements ClientRegistration {
     @PersistenceContext private EntityManager manager;
 
     @Override
-    public int register(String name, String address, Advisor advisor) {
+    public int register(String name, String town, String address, int zipcode, Advisor advisor) {
         System.out.println("REGISTER USER");
 
+        Address ad = new Address(town, address, zipcode);
+        manager.persist(ad);
 
-        Client c = new Client(name, address);
+        Client c = new Client(name, ad);
 
         c.setAdvisor(advisor);
 
@@ -39,10 +42,10 @@ public class ClientRegistryBean implements ClientRegistration {
     }
 
     @Override
-    public Client registerWithReturn(String name, String address, Advisor advisor) {
+    public Client registerWithReturn(String name, String town, String address, int zipcode, Advisor advisor) {
         System.out.println("REGISTER USER");
 
-        Client c = new Client(name, address);
+        Client c = new Client(name, new Address(town, address, zipcode));
         c.setAdvisor(advisor);
         advisor.addClient(c);
 

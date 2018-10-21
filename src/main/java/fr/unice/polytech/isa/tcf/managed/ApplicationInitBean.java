@@ -1,10 +1,7 @@
 package fr.unice.polytech.isa.tcf.managed;
 
 import fr.unice.polytech.isa.tcf.*;
-import fr.unice.polytech.isa.tcf.entities.Account;
-import fr.unice.polytech.isa.tcf.entities.Administrator;
-import fr.unice.polytech.isa.tcf.entities.Advisor;
-import fr.unice.polytech.isa.tcf.entities.Client;
+import fr.unice.polytech.isa.tcf.entities.*;
 import fr.unice.polytech.isa.tcf.exceptions.AlreadyExistingClientException;
 
 import javax.annotation.PostConstruct;
@@ -34,11 +31,15 @@ public class ApplicationInitBean {
 
     @PostConstruct
     public void init() {
-        administratorRegistration.register("admin", "Antibes");
-        Advisor advisor = advisorRegistration.registerWithReturn("advisor", "Nice");
+        Address ad1 = new Address("Nice", "rue des lilas", 06000);
+        Address ad2 = new Address("Paris", "rue leclerc", 92000);
+        Address ad3 =new Address("Vesoul", "place de la republique", 70000);
+
+        administratorRegistration.register("admin", "Nice", "rue des lilas", 06000);
+        Advisor advisor = advisorRegistration.registerWithReturn("advisor", "Paris", "rue leclerc", 92000);
 
 
-        accountRegistry.register(75, "Amine", "Nice");
+        accountRegistry.register(75, "Amine", "Vesoul", "place de la republique", 70000);
 
         //accountRegistry.register(500, client);
 
