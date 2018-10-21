@@ -24,6 +24,7 @@ public abstract class Person implements Serializable {
     protected Address address;
 
     public Person() {
+        address = new Address();
     }
 
 //    public Person(String name, String address) {
