@@ -39,7 +39,7 @@ public class ApplicationInitBean {
         Advisor advisor = advisorRegistration.registerWithReturn("advisor", "Paris", "rue leclerc", 92000);
 
 
-        accountRegistry.register(75, "Amine", "Vesoul", "place de la republique", 70000);
+        accountRegistry.register(75, "client", "Vesoul", "place de la republique", 70000);
 
         //accountRegistry.register(500, client);
 
