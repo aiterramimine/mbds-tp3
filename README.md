@@ -24,4 +24,5 @@ avant le "mvn install -DskipTests"
 ## Paramètres DBeaver
 - Nouvelle connexion HSQLDB / Embedded
 - Path = Path absolu jusqu'à target/apache-tomee/proddb
-- indentifiant: sa, password: <vide>
+- indentifiant: sa
+- laisser le champs de mot de passe vide
